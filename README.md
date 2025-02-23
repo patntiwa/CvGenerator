@@ -32,7 +32,7 @@ Ce projet consiste en un générateur de CV interactif développé en HTML, CSS 
 
 1. **Cloner le Dépôt :**
    ```bash
-   git clone https://github.com/votre-nom-d-utilisateur/generateur-cv-interactif.git
+   git clone https://github.com/patntiwa/CvGenerator.git
    ```
 2. **Ouvrir le Projet :**
    - Ouvrez le fichier `index.html` dans votre navigateur web préféré.
@@ -80,7 +80,7 @@ Les contributions sont bienvenues ! Voici comment vous pouvez participer :
 Si vous avez des questions ou des suggestions, n'hésitez pas à me contacter :
 
 - **Email :** [patntiwa19@gmail.com](mailto:patntiwa19@gmail.com)
-- **LinkedIn :** [Lien vers votre profil LinkedIn](#)
+- **LinkedIn :** [[https://www.linkedin.com/in/patrick-longchy/]](#)
 - **GitHub :** [Lien vers votre profil GitHub](#)
 
 ## Remerciements
