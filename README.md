@@ -1,4 +1,4 @@
-# Générateur de CV Interactif
+# Générateur de CV Interactif (Brief Inch.class 2025)
 
 Un outil interactif pour créer et personnaliser votre CV en temps réel.
 
@@ -86,3 +86,7 @@ Si vous avez des questions ou des suggestions, n'hésitez pas à me contacter :
 ## Remerciements
 
 - Merci de télécharger et d'utiliser ce générateur de CV interactif. J'espère qu'il vous sera utile pour créer un CV professionnel et personnalisé.
+
+## Licence
+
+Ce projet est sous licence MIT.
