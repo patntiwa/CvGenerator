@@ -1502,6 +1502,9 @@
   .\[color\:red\]\/50\! {
     color: color-mix(in oklab, red 50%, transparent) !important;
   }
+  .text-blue-500 {
+    color: var(--color-blue-500);
+  }
   .text-gray-600 {
     color: var(--color-gray-600);
   }

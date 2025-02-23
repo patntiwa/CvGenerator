@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Générateur de CV</title>
     <link rel="stylesheet" href="src/output.css">
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -17,7 +18,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <!-- Section Formulaire -->
             <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-semibold mb-4 font-bold">Formulaire</h2>
+                <h2 class="text-2xl font-bold mb-4 uppercase text-blue-500">Formulaire</h2>
 
                 <form id="cvForm" class="space-y-6">
                     <!-- Informations Personnelles -->
@@ -121,12 +122,11 @@
                 </form>
             </div>
 
-            <!-- Section Prévisualisation -->
 
             <!-- Section Prévisualisation -->
             <div class="bg-white p-6 rounded-lg shadow-md">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-semibold">Prévisualisation</h2>
+                    <h2 class="text-xl font-bold uppercase">Prévisualisation</h2>
                     <button id="downloadPDF"
                         class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center">
                         <i class="fas fa-download mr-2"></i>
