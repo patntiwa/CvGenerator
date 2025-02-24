@@ -58,7 +58,7 @@
                             Modifier
                         </button>
                         <button type="button" id="saveInfos"
-                            class="mt-3 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                             Sauvegarder
                         </button>
                     </div>
@@ -80,7 +80,7 @@
                             Modifier
                         </button>
                         <button type="button" id="saveExperience"
-                            class="mt-3 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                             Sauvegarder
                         </button>
                     </div>
@@ -117,7 +117,7 @@
                             Ajouter une expérience
                         </button>
                         <button type="button" id="saveExperience"
-                            class="mt-3 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                             Sauvegarder
                         </button>
                     </div>
@@ -156,7 +156,75 @@
                             Ajouter une formation
                         </button>
                         <button type="button" id="saveFormation"
-                            class="mt-3 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                            Sauvegarder
+                        </button>
+                    </div>
+
+                    <!-- Projets -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Projets</h3>
+                        <div id="projet" class="space-y-4">
+                            <div class="projet-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium">Titre</label>
+                                    <input type="text" name="titre[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium">Description</label>
+                                    <textarea name="description[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addProjet"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter un projet
+                        </button>
+                        <button type="button" id="saveProjet"
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                            Sauvegarder
+                        </button>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Certifications</h3>
+                        <div id="certifications" class="space-y-4">
+                            <div class="certifications-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium">Titre</label>
+                                    <input type="text" name="titre[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium">Description</label>
+                                    <textarea name="description[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                </div>
+
+                                <div class="mt-2">
+                                    <div class="flex justify-between">
+                                        <label class="block text-sm font-medium">Année de debut</label>
+                                        <label class="block text-sm font-medium">Année de fin</label>
+                                    </div>
+                                    <div class="flex items-center mt-1">
+                                        <input type="date" name="annee[]"
+                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <input type="date" name="annee[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addCertification"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter une certification
+                        </button>
+                        <button type="button" id="saveCertification"
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                             Sauvegarder
                         </button>
                     </div>
@@ -168,7 +236,7 @@
                             <div class="competences-entry border p-3 rounded">
                                 <div>
                                     <label class="block text-sm font-medium">Compétence 1</label>
-                                    <input type="text" name="poste[]"
+                                    <input type="text" name="competence[]"
                                         class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 </div>
                             </div>
@@ -178,7 +246,7 @@
                             Ajouter une compétence
                         </button>
                         <button type="button" id="saveSkills"
-                            class="mt-3 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
                             Sauvegarder
                         </button>
                     </div>
@@ -190,7 +258,7 @@
                             <div class="references-entry border p-3 rounded">
                                 <div>
                                     <label class="block text-sm font-medium">Nom</label>
-                                    <input type="text" name="nom"
+                                    <input type="text" name="competence"
                                         class="mt-1 block w-full p-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 </div>
                                 <div>
@@ -217,12 +285,12 @@
 
                                 <div>
                                     <label class="block text-sm font-medium">Proféssion</label>
-                                    <input type="text" name="telephone"
+                                    <input type="text" name="profession"
                                         class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium">Nom de la compagine</label>
-                                    <input type="text" name="telephone"
+                                    <input type="text" name="compagnie"
                                         class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 </div>
                             </div>
@@ -232,6 +300,50 @@
                             Ajouter une référence
                         </button>
                         <button type="button" id="saveReference"
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                            Sauvegarder
+                        </button>
+                    </div>
+
+                    <!-- Langues -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Langues</h3>
+                        <div id="langues" class="space-y-4">
+                            <div class="langues-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium"></label>
+                                    <input type="text" name="langues[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addLanguage"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter une langue
+                        </button>
+                        <button type="button" id="saveLanguage"
+                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                            Sauvegarder
+                        </button>
+                    </div>
+
+                    <!-- Centres d'interet -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Centres d'intérêts</h3>
+                        <div id="interest" class="space-y-4">
+                            <div class="interest-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium"></label>
+                                    <input type="text" name="intérêts[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addInterest"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter un intérêt
+                        </button>
+                        <button type="button" id="saveInterest"
                             class="mt-3 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
                             Sauvegarder
                         </button>
