@@ -98,82 +98,18 @@
                                     <input type="text" name="entreprise[]"
                                         class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 </div>
-                                <div class="mt-2">
-                                    <label class="block text-sm font-medium">Période</label>
-                                    <input type="text" name="periode[]"
-                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                <div class="form-elem relative mb-12">
+                                    <label for="" class="form-label block font-semibold text-sm text-black">Adresse<span class="opt-text">(optional)</span></label>
+                                    <input type="text" name="adresse[]" class="form-control w-full text-sm border-2 py-3.5 px-6 adresse" id="" onkeyup="" placeholder="e.g. Cité des palmiers" >
+                                    <span class="form-text"></span>
                                 </div>
-                                <div class="mt-2">
-                                    <label class="block text-sm font-medium">Description</label>
-                                    <textarea name="description[]"
-                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" id="addExperience"
-                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                            Ajouter une expérience
-                        </button>
-                        <button type="button" id="saveExperience"
-                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-                            Sauvegarder
-                        </button>
-                    </div>
-
-                    <!-- Formation -->
-                    <div>
-                        <h3 class="text-lg font-medium mb-3">Formation</h3>
-                        <div id="formations" class="space-y-4">
-                            <div class="formation-entry border p-3 rounded">
-                                <div>
-                                    <label class="block text-sm font-medium">Diplôme</label>
-                                    <input type="text" name="diplome[]"
-                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                </div>
-                                <div class="mt-2">
-                                    <label class="block text-sm font-medium">École</label>
-                                    <input type="text" name="ecole[]"
-                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                </div>
-                                <div class="mt-2">
-                                    <div class="flex justify-between">
-                                        <label class="block text-sm font-medium">Année de debut</label>
-                                        <label class="block text-sm font-medium">Année de fin</label>
-                                    </div>
-                                    <div class="flex items-center mt-1">
-                                        <input type="date" name="annee[]"
-                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                        <input type="date" name="annee[]"
-                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" id="addFormation"
-                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                            Ajouter une formation
-                        </button>
-                        <button type="button" id="saveFormation"
-                            class="mt-3 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
-                            Sauvegarder
-                        </button>
-                    </div>
-
-                    <!-- Projets -->
-                    <div>
-                        <h3 class="text-lg font-medium mb-3">Projets</h3>
-                        <div id="projet" class="space-y-4">
-                            <div class="projet-entry border p-3 rounded">
-                                <div>
-                                    <label class="block text-sm font-medium">Titre</label>
-                                    <input type="text" name="titre[]"
-                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                                 </div>
                                 
-                                <div class="mt-2">
-                                    <label class="block text-sm font-medium">Description</label>
-                                    <textarea name="description[]"
-                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                            <div class="cols-3">
+                                <div class="form-elem relative mb-12">
+                                    <label for="" class="form-label block font-semibold text-sm text-black">Email</label>
+                                    <input type="text" name="email[]" class="form-control w-full text-sm email border-2 py-3.5 px-6 " id="" onkeyup="" placeholder="e.g. Johndoe@gmail.com" >
+                                    <span class="form-text"></span>
                                 </div>
                             </div>
                         </div>
