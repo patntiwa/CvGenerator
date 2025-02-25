@@ -8,42 +8,63 @@
     <link rel="stylesheet" href="src/output.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            #downloadButtons {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body class="flex justify-center py-5">
     <div class="bg-white p-6 rounded-lg shadow-md md:w-[80%] m-auto">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold uppercase text-gray-900">Prévisualisation</h2>
-            <button id="downloadPDF"
-                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center">
-                <i class="fas fa-download mr-2"></i>
-                Télécharger PDF
-            </button>
+        <div id="downloadButtons" class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold text-blue-800 mb-4">Prévisualisation</h2>
+            <div class="flex gap-2">
+                <button id="downloadPDF" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <i class="fas fa-download mr-2"></i>
+                    Télécharger PDF
+                </button>
+                <button id="printCV" class="px-6 py-2 bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold rounded-lg 
+            hover:from-green-700 hover:to-green-900 transition-all duration-300 
+            shadow-lg hover:shadow-xl transform hover:scale-105">
+                    <i class="fas fa-print mr-2"></i>
+                    Imprimer
+                </button>
+            </div>
         </div>
-        <div class="w-full bg-white shadow-lg rounded-lg overflow-hidden flex">
+        <div id="cvDocument" class="w-full bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row">
             <!-- Colonne gauche (Infos personnelles, compétences) -->
-            <div class="w-1/3 bg-gray-900 text-white p-6">
+            <div class="w-full md:w-1/3 bg-gray-900 text-white p-6">
                 <!-- Photo de profil -->
                 <div class="text-center">
                     <img id="cvPhoto" src="https://placehold.co/600x400" alt="Photo de profil"
-                        class="w-[150px] h-[150px] rounded-full mx-auto mb-4 object-cover">
+                        class="w-[150px] h-[150px] rounded-full mx-auto mb-4 object-cover border-4 border-gray-700">
                     <h2 id="cvName" class="text-xl font-semibold">[Nom Prénom]</h2>
-                    <p id="cvTitle" class="text-sm text-gray-300">[Titre du poste]</p>
+                    <p id="cvTitle" class="text-sm text-gray-300 mt-1">[Titre du poste]</p>
                 </div>
 
                 <!-- Coordonnées -->
                 <div class="mt-6">
                     <h3 class="text-lg font-semibold border-b border-gray-700 pb-1">Coordonnées</h3>
                     <p id="cvAddress" class="text-sm mt-2 flex items-center">
-                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>
                         [Adresse]
                     </p>
                     <p id="cvEmail" class="text-sm mt-2 flex items-center">
-                        <i class="fas fa-envelope mr-2"></i>
+                        <i class="fas fa-envelope mr-2 text-blue-400"></i>
                         [Email]
                     </p>
                     <p id="cvPhone" class="text-sm mt-2 flex items-center">
-                        <i class="fas fa-phone mr-2"></i>
+                        <i class="fas fa-phone mr-2 text-blue-400"></i>
                         [Téléphone]
                     </p>
                 </div>
@@ -51,7 +72,7 @@
                 <!-- Compétences -->
                 <div class="mt-6">
                     <h3 class="text-lg font-semibold border-b border-gray-700 pb-1">Compétences</h3>
-                    <ul id="cvSkills" class="text-sm mt-2 space-y-1">
+                    <ul id="cvSkills" class="text-sm mt-2 space-y-2">
                         <!-- Les compétences seront ajoutées dynamiquement ici -->
                     </ul>
                 </div>
@@ -59,109 +80,147 @@
                 <!-- Langues -->
                 <div class="mt-6">
                     <h3 class="text-lg font-semibold border-b border-gray-700 pb-1">Langues</h3>
-                    <ul id="cvLanguages" class="text-sm mt-2 space-y-1">
+                    <ul id="cvLanguages" class="text-sm mt-2 space-y-2">
                         <!-- Les langues seront ajoutées dynamiquement ici -->
                     </ul>
                 </div>
             </div>
 
             <!-- Colonne droite (Expériences, formations) -->
-            <div class="w-2/3 p-6">
+            <div class="w-full md:w-2/3 p-6">
                 <!-- Description -->
                 <div class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">À propos</h3>
-                    <p id="cvDescription" class="text-sm text-gray-700 mt-2">
+                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">À propos</h3>
+                    <p id="cvDescription" class="text-sm text-gray-700 mt-3 leading-relaxed">
                         [Description personnelle]
                     </p>
                 </div>
 
                 <!-- Expériences professionnelles -->
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Expériences professionnelles</h3>
-                    <div id="cvExperiences">
+                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Expériences
+                        professionnelles</h3>
+                    <div id="cvExperiences" class="mt-3">
                         <!-- Les expériences seront ajoutées dynamiquement ici -->
                     </div>
                 </div>
 
                 <!-- Formations -->
                 <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Formations</h3>
-                    <div id="cvFormations">
+                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Formations</h3>
+                    <div id="cvFormations" class="mt-3">
                         <!-- Les formations seront ajoutées dynamiquement ici -->
                     </div>
                 </div>
 
                 <!-- Centres d'intérêt -->
                 <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Centres d'intérêt</h3>
-                    <ul id="cvInterests" class="list-disc pl-5 text-sm text-gray-700 mt-2">
+                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Centres d'intérêt
+                    </h3>
+                    <ul id="cvInterests" class="list-disc pl-5 text-sm text-gray-700 mt-3 space-y-1">
                         <!-- Les centres d'intérêt seront ajoutés dynamiquement ici -->
                     </ul>
                 </div>
 
                 <!-- Références -->
                 <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Références</h3>
-                    <div id="cvReferences">
+                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Références</h3>
+                    <div id="cvReferences" class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Les références seront ajoutées dynamiquement ici -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="flex justify-center space-x-4 py-4 border-blue-900  shadow-lg mt-14 border-t">
+            <button id="updateForm" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+        hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+        shadow-lg hover:shadow-xl transform hover:scale-105">
+                Mettre à jour
+            </button>
+            <button id="resetForm" class="px-6 py-2 bg-gradient-to-r from-red-600 to-red-800 text-white font-semibold rounded-lg 
+    hover:from-red-700 hover:to-red-900 transition-all duration-300 
+    shadow-lg hover:shadow-xl transform hover:scale-105">
+                Réinitialiser
+            </button>
 
+        </div>
+    </div>
     <script>
+
         // Fonction pour mettre à jour les informations du CV
         function updateCV(data) {
             // Informations personnelles
             document.getElementById('cvPhoto').src = data.photo || 'https://placehold.co/600x400';
-            document.getElementById('cvName').textContent = `${data.nom} ${data.prenom}`;
-            document.getElementById('cvTitle').textContent = data.title;
-            document.getElementById('cvDescription').textContent = data.description;
-            document.getElementById('cvAddress').textContent = data.address;
-            document.getElementById('cvEmail').textContent = data.email;
-            document.getElementById('cvPhone').textContent = data.phone;
+            document.getElementById('cvName').textContent = `${data.nom || ''} ${data.prenom || ''}`.trim() || '[Nom Prénom]';
+            document.getElementById('cvTitle').textContent = data.title || '[Titre du poste]';
+            document.getElementById('cvDescription').textContent = data.description || '[Description personnelle]';
+            document.getElementById('cvAddress').innerHTML = `<i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>${data.adresse || '[Adresse]'}`;
+            document.getElementById('cvEmail').innerHTML = `<i class="fas fa-envelope mr-2 text-blue-400"></i>${data.email || '[Email]'}`;
+            document.getElementById('cvPhone').innerHTML = `<i class="fas fa-phone mr-2 text-blue-400"></i>${data.telephone || '[Téléphone]'}`;
 
             // Compétences
-            const skillsList = document.getElementById('cvSkills');
-            skillsList.innerHTML = data.competences.map(skill => `<li>${skill}</li>`).join('');
-
-            // Expériences professionnelles
-            const experiencesList = document.getElementById('cvExperiences');
-            experiencesList.innerHTML = data.experiences.map(exp => `
-                <div class="mt-4">
-                    <h4 class="font-semibold">${exp.poste}</h4>
-                    <p class="text-sm text-gray-500">${exp.entreprise} | ${exp.debut} - ${exp.fin}</p>
-                    <p class="text-sm text-gray-700 mt-2">${exp.description}</p>
-                </div>
-            `).join('');
-
-            // Formations
-            const formationsList = document.getElementById('cvFormations');
-            formationsList.innerHTML = data.formations.map(formation => `
-                <div class="mt-4">
-                    <h4 class="font-semibold">${formation.diplome}</h4>
-                    <p class="text-sm text-gray-500">${formation.ecole} | ${formation.anneeDebut} - ${formation.anneeFin}</p>
-                </div>
-            `).join('');
-
-            // Centres d'intérêt
-            const interestsList = document.getElementById('cvInterests');
-            interestsList.innerHTML = data.interets.map(interet => `<li>${interet}</li>`).join('');
+            const skillsContainer = document.getElementById('cvSkills');
+            skillsContainer.innerHTML = '';
+            (data.competences || []).forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = skill;
+                skillsContainer.appendChild(li);
+            });
 
             // Langues
-            const languagesList = document.getElementById('cvLanguages');
-            languagesList.innerHTML = data.langues.map(langue => `<li>${langue}</li>`).join('');
+            const languagesContainer = document.getElementById('cvLanguages');
+            languagesContainer.innerHTML = '';
+            (data.langues || []).forEach(language => {
+                const li = document.createElement('li');
+                li.textContent = language;
+                languagesContainer.appendChild(li);
+            });
+
+            // Expériences professionnelles
+            const experiencesContainer = document.getElementById('cvExperiences');
+            experiencesContainer.innerHTML = '';
+            (data.experiences || []).forEach(exp => {
+                const div = document.createElement('div');
+                div.classList.add('mb-4');
+                div.innerHTML = `<h4 class="text-lg font-semibold">${exp.poste || '[Poste]'}</h4>
+                                 <p class="text-sm text-gray-600">${exp.entreprise || '[Entreprise]'}</p>
+                                 <p class="text-sm text-gray-600">${exp.duree || '[Durée]'}</p>
+                                 <p class="text-sm text-gray-700 mt-2">${exp.description || '[Description]'}</p>`;
+                experiencesContainer.appendChild(div);
+            });
+
+            // Formations
+            const formationsContainer = document.getElementById('cvFormations');
+            formationsContainer.innerHTML = '';
+            (data.formations || []).forEach(formation => {
+                const div = document.createElement('div');
+                div.classList.add('mb-4');
+                div.innerHTML = `<h4 class="text-lg font-semibold">${formation.diplome || '[Diplôme]'}</h4>
+                                 <p class="text-sm text-gray-600">${formation.ecole || '[École]'}</p>
+                                 <p class="text-sm text-gray-600">${formation.duree || '[Durée]'}</p>`;
+                formationsContainer.appendChild(div);
+            });
+
+            // Centres d'intérêt
+            const interestsContainer = document.getElementById('cvInterests');
+            interestsContainer.innerHTML = '';
+            (data.interets || []).forEach(interest => {
+                const li = document.createElement('li');
+                li.textContent = interest;
+                interestsContainer.appendChild(li);
+            });
 
             // Références
-            const referencesList = document.getElementById('cvReferences');
-            referencesList.innerHTML = data.references.map(ref => `
-                <div class="mt-4">
-                    <h4 class="font-semibold">${ref.nom}</h4>
-                    <p class="text-sm text-gray-500">${ref.entreprise} - ${ref.ville}</p>
-                    <p class="text-sm text-gray-700">📞 ${ref.telephone} | ✉️ ${ref.email}</p>
-                </div>
-            `).join('');
+            const referencesContainer = document.getElementById('cvReferences');
+            referencesContainer.innerHTML = '';
+            (data.references || []).forEach(reference => {
+                const div = document.createElement('div');
+                div.classList.add('mb-4');
+                div.innerHTML = `<h4 class="text-lg font-semibold">${reference.nom || '[Nom]'}</h4>
+                                 <p class="text-sm text-gray-600">${reference.poste || '[Poste]'}</p>
+                                 <p class="text-sm text-gray-600">${reference.contact || '[Contact]'}</p>`;
+                referencesContainer.appendChild(div);
+            });
         }
 
         // Exemple de données (à remplacer par les données du formulaire)
@@ -205,12 +264,6 @@
             ]
         };
 
-        // Mettre à jour le CV avec les données d'exemple
-        window.addEventListener('message', (event) => {
-            if (event.data) {
-                updateCV(event.data); // Utilise la fonction updateCV déjà définie
-            }
-        });
     </script>
 </body>
 
