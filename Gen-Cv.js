@@ -417,6 +417,155 @@ let cvData = {
       updatePreview();
     }
   });
+
+    // Fonction pour le localStorage : Sauvegarde et Récupération
+    // Fonction pour sauvegarder les données dans le localStorage
+function saveDataToLocalStorage() {
+    localStorage.setItem('cvData', JSON.stringify(cvData));
+  }
+  
+  // Fonction pour charger les données depuis le localStorage
+  function loadDataFromLocalStorage() {
+    const savedData = localStorage.getItem('cvData');
+    if (savedData) {
+      cvData = JSON.parse(savedData);
+      updateFormFields();
+      updatePreview();
+    }
+  }
+  
+  // Fonction pour mettre à jour les champs du formulaire avec les données chargées
+  function updateFormFields() {
+    document.getElementById("input-personal-lastname").value = cvData.nom;
+    document.getElementById("input-personal-firstname").value = cvData.prenom;
+    document.getElementById("input-personal-title").value = cvData.title;
+    document.getElementById("textarea-personal-description").value = cvData.description;
+    document.getElementById("input-personal-address").value = cvData.address;
+    document.getElementById("input-personal-email").value = cvData.email;
+    document.getElementById("input-personal-phone").value = cvData.phone;
+  
+    // Mettre à jour les autres sections (compétences, expériences, formations, etc.)
+    // Vous pouvez ajouter des fonctions similaires pour chaque section
+    updateExperienceFields();
+    updateEducationFields();
+    updateSkillFields();
+    updateInterestFields();
+    updateReferenceFields();
+    updateLanguageFields();
+  }
+  
+  // Appeler la fonction de sauvegarde après chaque mise à jour
+  function updatePreview() {
+    const iframe = document.querySelector("iframe");
+    iframe.contentWindow.postMessage(cvData, "*");
+    saveDataToLocalStorage(); // Sauvegarder les données après chaque mise à jour
+  }
+  
+  // Charger les données depuis le localStorage lors du chargement de la page
+  window.addEventListener("load", function () {
+    loadDataFromLocalStorage();
+    setTimeout(updatePreview, 1000);
+  });
+  
+  // Ajouter les fonctions pour mettre à jour les champs dupliqués
+  function updateExperienceFields() {
+    cvData.experiences.forEach((experience, index) => {
+      const experienceList = document.createElement("div");
+      experienceList.className = "mt-2 p-2 bg-blue-50 rounded-md";
+      experienceList.innerHTML = `
+        <div class="flex justify-between">
+          <div>
+            <strong>${experience.poste}</strong> - ${experience.entreprise}
+          </div>
+          <button class="delete-experience text-red-500 hover:text-red-700" data-index="${index}">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+        <div class="text-sm text-gray-600">${experience.debut} - ${experience.fin}</div>
+      `;
+      document.getElementById("experience-section").appendChild(experienceList);
+    });
+  }
+  
+  function updateEducationFields() {
+    cvData.formations.forEach((formation, index) => {
+      const formationList = document.createElement("div");
+      formationList.className = "mt-2 p-2 bg-blue-50 rounded-md";
+      formationList.innerHTML = `
+        <div class="flex justify-between">
+          <div>
+            <strong>${formation.diplome}</strong> - ${formation.ecole}
+          </div>
+          <button class="delete-formation text-red-500 hover:text-red-700" data-index="${index}">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+        <div class="text-sm text-gray-600">${formation.anneeDebut} - ${formation.anneeFin}</div>
+      `;
+      document.getElementById("education-section").appendChild(formationList);
+    });
+  }
+  
+  function updateSkillFields() {
+    cvData.competences.forEach((skill, index) => {
+      const skillList = document.createElement("div");
+      skillList.className = "mt-2 p-2 bg-blue-50 rounded-md flex justify-between";
+      skillList.innerHTML = `
+        <span>${skill}</span>
+        <button class="delete-skill text-red-500 hover:text-red-700" data-index="${index}">
+          <i class="fas fa-trash"></i>
+        </button>
+      `;
+      document.getElementById("skill-section").appendChild(skillList);
+    });
+  }
+  
+  function updateInterestFields() {
+    cvData.interets.forEach((interest, index) => {
+      const interestList = document.createElement("div");
+      interestList.className = "mt-2 p-2 bg-blue-50 rounded-md flex justify-between";
+      interestList.innerHTML = `
+        <span>${interest}</span>
+        <button class="delete-interest text-red-500 hover:text-red-700" data-index="${index}">
+          <i class="fas fa-trash"></i>
+        </button>
+      `;
+      document.getElementById("interest-section").appendChild(interestList);
+    });
+  }
+  
+  function updateReferenceFields() {
+    cvData.references.forEach((reference, index) => {
+      const referenceList = document.createElement("div");
+      referenceList.className = "mt-2 p-2 bg-blue-50 rounded-md";
+      referenceList.innerHTML = `
+        <div class="flex justify-between">
+          <div>
+            <strong>${reference.nom}</strong> - ${reference.entreprise}, ${reference.ville}
+          </div>
+          <button class="delete-reference text-red-500 hover:text-red-700" data-index="${index}">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+        <div class="text-sm text-gray-600">${reference.telephone} | ${reference.email}</div>
+      `;
+      document.getElementById("reference-section").appendChild(referenceList);
+    });
+  }
+  
+  function updateLanguageFields() {
+    cvData.langues.forEach((langue, index) => {
+      const languageList = document.createElement("div");
+      languageList.className = "mt-2 p-2 bg-blue-50 rounded-md flex justify-between";
+      languageList.innerHTML = `
+        <span>${langue}</span>
+        <button class="delete-language text-red-500 hover:text-red-700" data-index="${index}">
+          <i class="fas fa-trash"></i>
+        </button>
+      `;
+      document.getElementById("language-section").appendChild(languageList);
+    });
+  }  
   
   // Bouton pour mettre à jour le CV
   document.getElementById("updateForm")?.addEventListener("click", function () {
