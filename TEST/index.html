@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de CV</title>
+    <link rel="stylesheet" href="src/output.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold text-center mb-8 uppercase">Générateur de CV</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Section Formulaire -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-semibold mb-4 font-bold">Formulaire</h2>
+
+                <form id="cvForm" class="space-y-6">
+                    <!-- Informations Personnelles -->
+                    <div class="w-40 h-40 border-4 border-gray-400 rounded-lg overflow-hidden">
+                        <img src="chemin-de-votre-image.jpg" alt="Photo" class="w-full h-full object-cover">
+                    </div>
+
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Informations Personnelles</h3>
+                        <div id="ContactDetails" class="space-y-3">
+                            <div class="ContactDetails-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium">Nom</label>
+                                    <input type="text" name="nom"
+                                        class="mt-1 block w-full p-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Prénom</label>
+                                    <input type="text" name="prenom"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium">Age</label>
+                                    <input type="text" name="age"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Sexe</label>
+                                    <input type="text" name="sexe"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium">Adresse</label>
+                                    <input type="text" name="adresse"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                          
+                                <div>
+                                    <label class="block text-sm font-medium">Email</label>
+                                    <input type="email" name="email" placeholder="Veillez saisir votre email"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Téléphone</label>
+                                    <input type="text" name="telephone"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Situation actuelle</label>
+                                    <input type="text" name="situation actuelle"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addInfos"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Modifier
+                        </button>
+                    </div>
+
+                    <!-- Expériences -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Expériences Professionnelles</h3>
+                        <div id="experiences" class="space-y-4">
+                            <div class="experience-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium">Poste</label>
+                                    <input type="text" name="poste[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium">Entreprise</label>
+                                    <input type="text" name="entreprise[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium">Période</label>
+                                    <input type="text" name="periode[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium">Description</label>
+                                    <textarea name="description[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addExperience"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter une expérience
+                        </button>
+                    </div>
+
+                    <!-- Formation -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Formation</h3>
+                        <div id="formations" class="space-y-4">
+                            <div class="formation-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium">Diplôme</label>
+                                    <input type="text" name="diplome[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium">Établissement</label>
+                                    <input type="text" name="ecole[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div class="mt-2">
+                                    <div class="flex justify-between">
+                                        <label class="block text-sm font-medium">Année de debut</label>
+                                        <label class="block text-sm font-medium">Année de fin</label>
+                                    </div>
+                                    <div class="flex items-center mt-1">
+                                        <input type="date" name="annee[]"
+                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                        <input type="date" name="annee[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addFormation"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter une formation
+                        </button>
+                    </div>
+
+                    <!-- Compétences -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Compétences</h3>
+                        <div id="competences" class="space-y-4">
+                            <div class="competences-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium">Compétence 1</label>
+                                    <input type="text" name="competence[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addSkills"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter une compétence
+                        </button>
+                    </div>
+
+                    <!-- Réferences -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Références</h3>
+                        <div id="references" class="space-y-3">
+                            <div class="references-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium">Nom</label>
+                                    <input type="text" name="competence"
+                                        class="mt-1 block w-full p-2 border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Prénom</label>
+                                    <input type="text" name="prenom"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Adresse</label>
+                                    <input type="text" name="adresse"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                          
+                                <div>
+                                    <label class="block text-sm font-medium">Email</label>
+                                    <input type="email" name="email" placeholder="Veillez saisir son email"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Téléphone</label>
+                                    <input type="text" name="telephone"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+
+                                <div>
+                                    <label class="block text-sm font-medium">Proféssion</label>
+                                    <input type="text" name="profession"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Nom de la compagine</label>
+                                    <input type="text" name="compagnie"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addReference"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter une référence
+                        </button>
+                    </div>
+
+                    <!-- Langues -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Langues</h3>
+                        <div id="langues" class="space-y-4">
+                            <div class="langues-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium"></label>
+                                    <input type="text" name="langues[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addLanguage"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter une langue
+                        </button>
+                    </div>
+
+                    <!-- Centres d'interet -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-3">Centres d'intérêts</h3>
+                        <div id="interest" class="space-y-4">
+                            <div class="interest-entry border p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium"></label>
+                                    <input type="text" name="intérêts[]"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="addInterest"
+                            class="mt-3 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            Ajouter un intérêt
+                        </button>
+                    </div>
+
+                    <button type="submit" class="w-full px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                        Générer CV
+                    </button>
+                </form>
+            </div>
+
+            <!-- Section Prévisualisation -->
+
+            <!-- Section Prévisualisation -->
+            <!-- <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">Prévisualisation</h2>
+                    <button id="downloadPDF"
+                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center">
+                        <i class="fas fa-download mr-2"></i>
+                        Télécharger PDF
+                    </button>
+                </div>
+                <div id="CV" class="space-y-6">
+                    <div id="personal-preview" class="border-b pb-4">
+                        <h3 class="text-2xl font-bold" id="preview-name"></h3>
+                        <p id="preview-contact" class="text-gray-600"></p>
+                    </div>
+
+                    <div id="experience-preview" class="border-b pb-4">
+                        <h3 class="text-xl font-semibold mb-3">Expériences Professionnelles</h3>
+                        <div id="preview-experiences" class="space-y-4"></div>
+                    </div>
+
+                    <div id="education-preview">
+                        <h3 class="text-xl font-semibold mb-3">Formation</h3>
+                        <div id="preview-formations" class="space-y-4"></div>
+                    </div>
+                </div>
+            </div> -->
+<!-- ------------- -->
+            <div class="cv">
+                <!-- Barre latérale avec infos  -->
+                 <aside class="sidebar">
+                    <!-- photo de profil -->
+                     <img class="profilImage" src="" alt="Photo de profil">
+
+                     <!-- section contact -->
+                      <section class="">
+
+                      </section>
+                 </aside>
+            </div>
+
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
