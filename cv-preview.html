@@ -63,14 +63,22 @@
                         <!-- Les langues seront ajoutées dynamiquement ici -->
                     </ul>
                 </div>
+
+                <!-- Centres d'intérêt -->
+                <div class="mt-6">
+                    <h3 class="text-lg font-semibold border-gray-700 border-b pb-1">Centres d'intérêt</h3>
+                    <ul id="cvInterests" class="text-sm mt-2 space-y-1">
+                        <!-- Les centres d'intérêt seront ajoutés dynamiquement ici -->
+                    </ul>
+                </div>
             </div>
 
             <!-- Colonne droite (Expériences, formations) -->
             <div class="w-2/3 p-6">
                 <!-- Description -->
                 <div class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">À propos</h3>
-                    <p id="cvDescription" class="text-sm text-gray-700 mt-2">
+                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Profil</h3>
+                    <p id="cvDescription" class="text-sm text-gray-700 mt-2 text-justify">
                         [Description personnelle]
                     </p>
                 </div>
@@ -89,14 +97,6 @@
                     <div id="cvFormations">
                         <!-- Les formations seront ajoutées dynamiquement ici -->
                     </div>
-                </div>
-
-                <!-- Centres d'intérêt -->
-                <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b pb-2">Centres d'intérêt</h3>
-                    <ul id="cvInterests" class="list-disc pl-5 text-sm text-gray-700 mt-2">
-                        <!-- Les centres d'intérêt seront ajoutés dynamiquement ici -->
-                    </ul>
                 </div>
 
                 <!-- Références -->
@@ -167,13 +167,13 @@
         // Exemple de données (à remplacer par les données du formulaire)
         const exampleData = {
             photo: '',
-            nom: 'Dupont',
-            prenom: 'Jean',
+            nom: 'Ntiwa',
+            prenom: 'Emmanuel',
             title: 'Développeur Full Stack',
             description: 'Passionné par le développement web et les nouvelles technologies.',
-            address: '123 Rue de Paris, 75001 Paris, France',
-            email: 'jean.dupont@example.com',
-            phone: '+33 6 12 34 56 78',
+            address: 'Douala V, Wouri, Kotto village,',
+            email: 'Ntiwaemmanuel03.@gmail.com',
+            phone: '+237 6 95 71 34 02/ +237 6 92 45 53 27',
             competences: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js'],
             experiences: [
                 {
@@ -187,7 +187,7 @@
             formations: [
                 {
                     diplome: 'Master en Informatique',
-                    ecole: 'Université de Paris',
+                    ecole: 'Université de Douala',
                     anneeDebut: '2015',
                     anneeFin: '2017'
                 }
@@ -196,11 +196,12 @@
             langues: ['Anglais (C1)', 'Espagnol (B2)'],
             references: [
                 {
-                    nom: 'Marie Durand',
+                    nom: 'Atangana Dieu Donne',
+                    profession: 'Developpeur senior',
                     entreprise: 'TechCorp',
-                    ville: 'Paris',
-                    telephone: '+33 6 98 76 54 32',
-                    email: 'marie.durand@techcorp.com'
+                    ville: 'Yaoundé',
+                    telephone: '+237 6 98 76 54 32',
+                    email: 'BishopTagne@techcorp.com'
                 }
             ]
         };
