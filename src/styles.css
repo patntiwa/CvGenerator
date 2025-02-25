@@ -1,0 +1,6 @@
+.error-message {
+    display: none; /* Masqué par défaut */
+    margin-top: 4px;
+    font-size: 0.875rem; /* 14px */
+    color: #ef4444; /* Rouge */
+}
