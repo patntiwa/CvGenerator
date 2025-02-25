@@ -145,9 +145,17 @@ let cvData = {
   
       if (diplome && ecole) {
         // Formatage des dates pour affichage
-        const anneeDebut = new Date(debut).getFullYear();
-        const anneeFin = fin ? new Date(fin).getFullYear() : "Présent";
-  
+        const anneeDebut = new Date(debut).toLocaleDateString("fr-FR", {
+            year: "numeric",
+            month: "short",
+          });
+          const anneeFin = fin
+            ? new Date(fin).toLocaleDateString("fr-FR", {
+                year: "numeric",
+                month: "short",
+              })
+            : "Présent";
+
         cvData.formations.push({
           diplome: diplome,
           ecole: ecole,
