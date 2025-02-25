@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cv Generateur</title>
+    <link rel="stylesheet" href="src/output.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+    <header class="border-b-2 border-blue-900 mb-5 shadow-lg bg-white">
+        <div class="flex items-center justify-center space-x-2.5 py-4">
+            <img src="img/curriculum-vitae.png" alt="cv" class="w-[30px] h-auto">
+            <h1 class="text-xl font-bold text-center uppercase text-blue-900">Générateur de CV</h1>
+        </div>
+    </header>
+    <div class="w-full mx-auto p-2">
+        <div class="flex flex-col lg:flex-row gap-8 p-6">
+
+            <!-- Section Formulaire -->
+            <div class="p-6 rounded-lg w-full lg:w-[40%] bg-white shadow-xl">
+                <h2
+                    class="bg-gradient-to-r from-blue-600 to-blue-800 text-xl md:text-2xl p-3 rounded-lg font-bold mb-6 text-white shadow-md">
+                    Formulaire de CV
+                </h2>
+                <form id="cvForm" class="space-y-6">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Informations Personnelles
+                        </h3>
+                        <div id="infopersonnel" class="space-y-4">
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="file-personal-photo">Photo</label>
+                                <input type="file" id="file-personal-photo" accept=".jpg, .jpeg, .png"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100 text-gray-950">
+                                <p class="text-gray-500 text-xs">Formats acceptés : JPG, JPEG, PNG.</p>
+                            </div>
+                            <div class="w-full flex space-x-2 mt-1">
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium" for="input-personal-lastname">Nom de
+                                        famille</label>
+                                    <input type="text" id="input-personal-lastname"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                        required>
+                                    <span id="error-personal-lastname"
+                                        class="error-message text-red-500 text-sm"></span>
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium"
+                                        for="input-personal-firstname">Prénom</label>
+                                    <input type="text" id="input-personal-firstname"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="w-full flex space-x-2 mt-1">
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium"
+                                        for="input-personinput-personal-firstname">Âge</label>
+                                    <input type="text" id="input-personinput-personal-firstname"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                        required>
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium" for="select-personal-gender">Sexe</label>
+                                    <select name="sexe" id="select-personal-gender"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                        <option value="M">Masculin</option>
+                                        <option value="F">Féminin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-title">Titre du
+                                    poste</label>
+                                <input type="text" id="input-personal-title"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-situation">Situation
+                                    Actuelle</label>
+                                <input type="text" id="input-personal-situation"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium"
+                                    for="textarea-personal-description">Description</label>
+                                <textarea type="text" id="textarea-personal-description"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500"></textarea>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-email">Email</label>
+                                <input type="email" id="input-personal-email"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                                <span id="error-personal-email" class="error-message text-red-500 text-sm"></span>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-phone">Téléphone</label>
+                                <input type="tel" id="input-personal-phone"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-address">Adresse</label>
+                                <input type="text" id="input-personal-address"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Expériences Professionnelles -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Expériences professionnelles
+                        </h3>
+                        <div id="experience-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium" for="input-experience-jobtitle">Poste
+                                        Occupé</label>
+                                    <input type="text" id="input-experience-jobtitle"
+                                        class="mt-1 block w-full p-2 rounded-md bg-gray-100 border-gray-300 shadow-sm ">
+                                    <span id="error-experience-jobtitle"
+                                        class="error-message text-red-500 text-sm"></span>
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium  pb-1" for="input-experience-company">Nom De
+                                        l'Entreprise</label>
+                                    <input type="text" id="input-experience-company"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium pb-1">Période</label>
+                                    <div class="flex gap-2">
+                                        <div class="w-1/2">
+                                            <label class="block text-sm font-medium"
+                                                for="input-experience-startdate">Début</label>
+                                            <input type="date" id="input-experience-startdate"
+                                                class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm"
+                                                required>
+                                        </div>
+                                        <div class="w-1/2">
+                                            <label class="block text-sm font-medium"
+                                                for="input-experience-enddate">Fin</label>
+                                            <input type="date" id="input-experience-enddate"
+                                                class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium pb-1"
+                                        for="textarea-experience-description">Description</label>
+                                    <textarea id="textarea-experience-description"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm"></textarea>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="button" id="button-add-experiencee" class=" px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                                hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                                shadow-lg hover:shadow-xl transform hover:scale-105">
+                                        Ajouter une expérience
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formation -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Formation</h3>
+                        <div id="education-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium" for="input-education-degree">Diplôme
+                                        Obtenus</label>
+                                    <input type="text" name="input-education-degree" title="Diplôme Obtenus"
+                                        placeholder="Entrez le diplôme obtenu"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium" for="input-education-school">École</label>
+                                    <input type="text" name="input-education-school" title="École"
+                                        placeholder="Entrez le nom de l'école"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm">
+                                </div>
+                                <div class="flex justify-between mt-2 gap-2">
+                                    <div class="w-1/2">
+                                        <label class="block text-sm font-medium" for="input-education-startdate">Année
+                                            de debut</label>
+                                        <input type="date" name="input-education-startdate" title="Année de debut"
+                                            placeholder="Entrez l'année de debut"
+                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm ">
+
+                                    </div>
+                                    <div class="w-1/2">
+                                        <label class="block text-sm font-medium" for="input-education-enddate">Année de
+                                            fin</label>
+                                        <input type="date" name="input-education-enddate" title="Année de fin"
+                                            placeholder="Entrez l'année de fin"
+                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="button-add-education" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                                hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                                shadow-lg hover:shadow-xl transform hover:scale-105">
+                            Ajouter une formation
+                        </button>
+                    </div>
+
+                    <!-- Compétences -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Compétences
+                        </h3>
+                        <div id="skill-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium" for="input-skill-name">Compétence</label>
+                                    <input type="text" name="input-skill-name" title="Compétence"
+                                        placeholder="Entrez une compétence"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                </div>
+                                <button type="button" id="button-add-skill" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                                    hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                                    shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter une compétence
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Centres d'intérêt -->
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Centres d’intérêt
+                        </h3>
+                        <div id="interest-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div>
+                                    <label class="flex-grow truncate block font-medium text-gray-600 text-sm"
+                                        for="input-interest-name">Intérêt</label>
+                                    <input type="text" name="input-interest-name" title="Intérêt"
+                                        placeholder="Entrez un intérêt"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-100 bg-gray-100 shadow-sm ">
+                                </div>
+                                <button type="button" id="button-add-interest" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                                hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                                shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter un centre d'interêt
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Références -->
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Réferences
+                        </h3>
+                        <div id="reference-section" class="space-y-4">
+                            <div class="reference-entry p-3 rounded">
+                                <div id="" class="flex flex-col">
+                                    <div class="py-2 ">
+                                        <div class="">
+                                            <div class="flex items-center mb-1">
+                                                <label for="input-reference-name"
+                                                    class="flex-grow truncate block font-medium text-gray-600 text-sm">Nom</label>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                            <input id="input-reference-name" data-s="input-reference-name" type="text"
+                                                size="1" autocomplete="off" maxlength="1000"
+                                                class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                value="">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-wrap -mx-2">
+                                        <div class="w-full sm:flex-equal-width px-2">
+                                            <div class="py-2 ">
+                                                <div class="">
+                                                    <div class="flex items-center mb-1">
+                                                        <label for="input-reference-company"
+                                                            class="flex-grow truncate block font-medium text-gray-600 text-sm">Entreprise</label>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                    <input id="input-reference-company" data-s="Entreprise" type="text"
+                                                        size="1" autocomplete="off" maxlength="1000"
+                                                        class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full sm:flex-equal-width px-2">
+                                            <div class="py-2 ">
+                                                <div class="">
+                                                    <div class="flex items-center mb-1">
+                                                        <label for="input-reference-city"
+                                                            class="flex-grow truncate block font-medium text-gray-600 text-sm">Ville</label>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                    <input id="input-reference-city" data-s="Ville" type="text" size="1"
+                                                        autocomplete="off" maxlength="1000"
+                                                        class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-wrap -mx-2">
+                                        <div class="w-full sm:flex-equal-width px-2">
+                                            <div class="py-2 ">
+                                                <div class="">
+                                                    <div class="flex items-center mb-1">
+                                                        <label for="input-reference-phone"
+                                                            class="flex-grow truncate block font-medium text-gray-600 text-sm">Numéro
+                                                            de téléphone</label>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                    <input id="input-reference-phone" data-s="Numéro de téléphone"
+                                                        type="text" size="1" autocomplete="off" maxlength="1000"
+                                                        class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full sm:flex-equal-width px-2">
+                                            <div class="py-2 ">
+                                                <div class="">
+                                                    <div class="flex items-center mb-1">
+                                                        <label for="input-reference-email"
+                                                            class="flex-grow truncate block font-medium text-gray-600 text-sm">Adresse
+                                                            e-mail</label>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                    <input id="input-reference-email" data-s="Adresse e-mail"
+                                                        type="text" size="1" title="Adresse e-mail"
+                                                        placeholder="Entrez l'adresse e-mail" autocomplete="off"
+                                                        maxlength="1000"
+                                                        class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" id="button-add-reference" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                        hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                        shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter une référence
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Langue -->
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Langues
+                        </h3>
+                        <div id="language-section" class="space-y-4">
+                            <div class="language-entry p-3 rounded">
+                                <div>
+                                    <label class="flex-grow truncate block font-medium text-gray-600 text-sm"
+                                        for="select-language-name">Langue</label>
+                                    <select name="select-language-name" title="Langue"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300  bg-gray-100">
+                                        <option value="" class="bg-white text-gray-400">Choisissez</option>
+                                        <option value="beginner" class="bg-white text-gray-800">Débutant</option>
+                                        <option value="moderate" class="bg-white text-gray-800">Intermédiaire</option>
+                                        <option value="good" class="bg-white text-gray-800">Bien</option>
+                                        <option value="veryGood" class="bg-white text-gray-800">Très bien</option>
+                                        <option value="fluent" class="bg-white text-gray-800">Courant</option>
+                                        <hr>
+                                        <option value="A1" class="bg-white text-gray-800">A1</option>
+                                        <option value="A2" class="bg-white text-gray-800">A2</option>
+                                        <option value="B1" class="bg-white text-gray-800">B1</option>
+                                        <option value="B2" class="bg-white text-gray-800">B2</option>
+                                        <option value="C1" class="bg-white text-gray-800">C1</option>
+                                        <option value="C2" class="bg-white text-gray-800">C2</option>
+                                    </select>
+                                </div>
+                                <button type="button" id="button-add-language" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter une langue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <!-- Section Prévisualisation -->
+            <div
+                class="sticky top-20 h-[calc(100vh-7rem)] w-full lg:w-[55%] xl:w-[60%] bg-white shadow-xl rounded-lg overflow-hidden hidden lg:block">
+                <div
+                    class="bg-gradient-to-r from-blue-600 to-blue-800 text-xl text-white p-3 font-bold flex justify-between items-center">
+                    <h2>Prévisualisation</h2>
+                    <button id="toggleFullscreen"
+                        class="px-3 py-1 bg-white text-blue-800 rounded hover:bg-blue-100 text-sm">
+                        <i class="fas fa-expand"></i> Plein Écran
+                    </button>
+                </div>
+                <iframe id="previewFrame" src="cv-preview.html" frameborder="0" class="w-full h-[calc(100%-7rem)] "
+                    title="CV Preview"></iframe>
+            </div>
+
+            <!-- Bouton flottant pour la prévisualisation sur mobile -->
+            <buttonbutton id="showPreview" title="Afficher la prévisualisation"
+                class="fixed bottom-6 right-6 lg:hidden bg-blue-700 text-white p-4 rounded-full shadow-lg z-50">
+                <i class="fas fa-eye text-xl"></i>
+                </button>
+
+                <!-- Overlay modal pour la prévisualisation sur mobile -->
+                <div id="previewModal"
+                    class="fixed inset-0 bg-gray-900 bg-opacity-90 z-50 hidden flex items-center justify-center">
+                    <div class="bg-white w-[95%] h-[90%] rounded-lg overflow-hidden flex flex-col">
+                        <div
+                            class="bg-gradient-to-r from-blue-600 to-blue-800 text-xl text-white p-3 font-bold flex justify-between items-center">
+                            <h2>Prévisualisation</h2>
+                            <button id="closePreview" class="text-white hover:text-red-200"
+                                title="Fermer la prévisualisation">
+                                <i class="fas fa-times text-xl"></i>
+                            </button>
+                        </div>
+                        <iframe src="cv-preview.html" frameborder="0" class="w-full flex-grow"
+                            title="CV Preview Mobile"></iframe>
+                    </div>
+                </div>
+        </div>
+
+        <script src="./assets/js/Gen-Cv.js"></script>
+        <script>
+            // Gestion du mode plein écran pour la prévisualisation
+            document.getElementById('toggleFullscreen').addEventListener('click', function () {
+                const previewSection = document.querySelector('.lg\\:w-\\[55\\%\\]');
+                previewSection.classList.toggle('lg:w-[55%]');
+                previewSection.classList.toggle('xl:w-[60%]');
+                previewSection.classList.toggle('lg:w-[100%]');
+                previewSection.classList.toggle('fixed');
+                previewSection.classList.toggle('inset-0');
+                previewSection.classList.toggle('z-50');
+
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-expand')) {
+                    icon.classList.remove('fa-expand');
+                    icon.classList.add('fa-compress');
+                    this.querySelector('text-node').textContent = ' Réduire';
+                } else {
+                    icon.classList.remove('fa-compress');
+                    icon.classList.add('fa-expand');
+                    this.querySelector('text-node').textContent = ' Plein Écran';
+                }
+            });
+
+            // Gestion de la prévisualisation sur mobile
+            document.getElementById('showPreview').addEventListener('click', function () {
+                document.getElementById('previewModal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+
+            document.getElementById('closePreview').addEventListener('click', function () {
+                document.getElementById('previewModal').classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+        </script>
+</body>
+
+</html>
