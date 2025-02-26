@@ -7,6 +7,9 @@ let cvData = {
     address: "",
     email: "",
     phone: "",
+    sexe:"",
+    age:"",
+    statut:"",
     competences: [],
     experiences: [],
     formations: [],
@@ -47,6 +50,9 @@ let cvData = {
     cvData.address = document.getElementById("input-personal-address").value;
     cvData.email = document.getElementById("input-personal-email").value;
     cvData.phone = document.getElementById("input-personal-phone").value;
+    cvData.sexe = document.getElementById("select-personal-gender").value;
+    cvData.age = document.getElementById("input-personal-age").value;
+    cvData.statut = document.getElementById("input-personal-situation").value;
   
     updatePreview();
   }
@@ -419,6 +425,7 @@ let cvData = {
   });
 
     // Fonction pour le localStorage : Sauvegarde et Récupération
+
     // Fonction pour sauvegarder les données dans le localStorage
 function saveDataToLocalStorage() {
     localStorage.setItem('cvData', JSON.stringify(cvData));
@@ -443,6 +450,8 @@ function saveDataToLocalStorage() {
     document.getElementById("input-personal-address").value = cvData.address;
     document.getElementById("input-personal-email").value = cvData.email;
     document.getElementById("input-personal-phone").value = cvData.phone;
+    document.getElementById("input-personal-phone").value = cvData.sexe;
+    document.getElementById("input-personal-phone").value = cvData.age;
   
     // Mettre à jour les autres sections (compétences, expériences, formations, etc.)
     // Vous pouvez ajouter des fonctions similaires pour chaque section
@@ -591,6 +600,9 @@ function saveDataToLocalStorage() {
         address: "",
         email: "",
         phone: "",
+        sexe:"",
+        age:"",
+        statut:"",
         competences: [],
         experiences: [],
         formations: [],
