@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de CV</title>
+    <link rel="stylesheet" href="src/output.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Styles pour la responsivité des onglets */
+        .tabs-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.25rem;
+        }
+
+        .tab-button {
+            flex: 0 0 auto;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .tabs-container {
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .tabs-container::-webkit-scrollbar {
+                display: none;
+                /* Chrome, Safari, Edge */
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+    <header class="border-b-2 border-blue-900 mb-5 shadow-lg bg-white">
+        <div class="flex items-center justify-center space-x-2.5 py-4">
+            <img src="img/curriculum-vitae.png" alt="cv" class="w-[30px] h-auto">
+            <h1 class="text-xl font-bold text-center uppercase text-blue-900">Générateur de CV</h1>
+        </div>
+    </header>
+
+    <div class="w-full mx-auto p-2">
+        <div class="flex flex-col lg:flex-row gap-8 p-6">
+            <!-- Section Formulaire avec onglets -->
+            <div class="p-6 rounded-lg w-full lg:w-[40%] bg-white shadow-xl">
+                <h2
+                    class="bg-gradient-to-r from-blue-600 to-blue-800 text-xl md:text-2xl p-3 rounded-lg font-bold mb-6 text-white shadow-md">
+                    Formulaire de CV
+                </h2>
+
+                <!-- Onglets avec classe pour la responsivité -->
+                <div class="tabs-container border-b border-gray-200">
+                    <button id="tab-personal"
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-800">
+                        Informations Personnelles
+                    </button>
+                    <button id="tab-experience"
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-800">
+                        Expériences
+                    </button>
+                    <button id="tab-education"
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-800">
+                        Formations
+                    </button>
+                    <button id="tab-skills"
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-800">
+                        Compétences
+                    </button>
+                    <button id="tab-interests"
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-800">
+                        Centres d'Intérêt
+                    </button>
+                    <button id="tab-references"
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-800">
+                        Références
+                    </button>
+                    <button id="tab-languages"
+                        class="tab-button px-4 py-2 text-sm font-medium text-gray-500 hover:text-blue-800">
+                        Langues
+                    </button>
+                </div>
+
+                <!-- Contenu des onglets -->
+                <div class="mt-4 overflow-y-auto max-h-[70vh]">
+                    <!-- Onglet Informations Personnelles -->
+                    <div id="content-personal" class="tab-content hidden">
+                        <!-- Contenu existant des Informations Personnelles -->
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-4">Informations Personnelles</h3>
+                            <div id="infopersonnel" class="space-y-4">
+                                <!-- Photo, Nom, Prénom, Âge, Sexe, etc. -->
+                                <!-- ... (contenu existant) ... -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Expériences Professionnelles -->
+                    <div id="content-experience" class="tab-content hidden">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-4">Expériences Professionnelles</h3>
+                            <div id="experience-section" class="space-y-4">
+                                <!-- Poste, Entreprise, Dates, Description, etc. -->
+                                <!-- ... (contenu existant) ... -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Formations -->
+                    <div id="content-education" class="tab-content hidden">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-4">Formations</h3>
+                            <div id="education-section" class="space-y-4">
+                                <!-- Diplôme, École, Dates, etc. -->
+                                <!-- ... (contenu existant) ... -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Compétences -->
+                    <div id="content-skills" class="tab-content hidden">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-4">Compétences</h3>
+                            <div id="skill-section" class="space-y-4">
+                                <!-- Liste des compétences -->
+                                <!-- ... (contenu existant) ... -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Centres d'Intérêt -->
+                    <div id="content-interests" class="tab-content hidden">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-4">Centres d'Intérêt</h3>
+                            <div id="interest-section" class="space-y-4">
+                                <!-- Liste des centres d'intérêt -->
+                                <!-- ... (contenu existant) ... -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Références -->
+                    <div id="content-references" class="tab-content hidden">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-4">Références</h3>
+                            <div id="reference-section" class="space-y-4">
+                                <!-- Nom, Entreprise, Téléphone, Email, etc. -->
+                                <!-- ... (contenu existant) ... -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Onglet Langues -->
+                    <div id="content-languages" class="tab-content hidden">
+                        <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                            <h3 class="text-lg font-semibold text-blue-800 mb-4">Langues</h3>
+                            <div id="language-section" class="space-y-4">
+                                <!-- Liste des langues -->
+                                <!-- ... (contenu existant) ... -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section Prévisualisation -->
+            <div class="w-full lg:w-[55%]">
+                <!-- Bouton de bascule visible uniquement sur mobile/tablette -->
+                <button id="toggle-preview"
+                    class="w-full py-3 mb-3 bg-blue-700 text-white rounded-lg shadow-md font-medium lg:hidden">
+                    <i class="fas fa-eye mr-2"></i>Voir la prévisualisation
+                </button>
+
+                <!-- Contrôles de zoom - visibles sur tous les appareils -->
+                <div class="flex items-center justify-end mb-2 gap-2">
+                    <span class="text-sm text-gray-600 mr-2">Zoom:</span>
+                    <button id="zoom-out" class="bg-gray-200 hover:bg-gray-300 p-2 rounded-full">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <span id="zoom-level" class="text-sm font-medium w-12 text-center">100%</span>
+                    <button id="zoom-in" class="bg-gray-200 hover:bg-gray-300 p-2 rounded-full">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button id="zoom-reset"
+                        class="bg-blue-600 text-white hover:bg-blue-700 px-3 py-1 rounded-md text-sm ml-2">
+                        Réinitialiser
+                    </button>
+                </div>
+
+                <!-- Conteneur d'iframe avec hauteur ajustable et zoom -->
+                <div id="preview-container" class="hidden lg:block sticky top-0 h-screen overflow-auto">
+                    <div id="zoom-container" style="transform-origin: 0 0; transition: transform 0.2s ease;">
+                        <iframe id="cv-preview" src="cv-preview.html" frameborder="0"
+                            class="w-full bg-white rounded-lg shadow-xl" style="height: 100vh;"
+                            title="CV Preview"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Gestion des onglets - version améliorée
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            function activateTab(tabId) {
+                // Désactiver tous les onglets
+                tabs.forEach(t => {
+                    t.classList.remove('active', 'bg-blue-100', 'text-blue-800');
+                    t.classList.add('text-gray-500');
+                });
+
+                tabContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // Activer l'onglet sélectionné
+                const selectedTab = document.getElementById(tabId);
+                selectedTab.classList.add('active', 'bg-blue-100', 'text-blue-800');
+                selectedTab.classList.remove('text-gray-500');
+
+                const targetContentId = tabId.replace('tab-', 'content-');
+                const targetContent = document.getElementById(targetContentId);
+                if (targetContent) {
+                    targetContent.classList.remove('hidden');
+                }
+
+                // Faire défiler vers l'onglet actif sur mobile si nécessaire
+                if (window.innerWidth <= 768) {
+                    const tabsContainer = document.querySelector('.tabs-container');
+                    const tabPosition = selectedTab.offsetLeft;
+                    const containerWidth = tabsContainer.offsetWidth;
+                    const scrollPosition = tabPosition - (containerWidth / 2) + (selectedTab.offsetWidth / 2);
+
+                    tabsContainer.scrollTo({
+                        left: Math.max(0, scrollPosition),
+                        behavior: 'smooth'
+                    });
+                }
+            }
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    activateTab(tab.id);
+                });
+            });
+
+            // Activer le premier onglet par défaut
+            activateTab('tab-personal');
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Variables pour le zoom
+            let zoomLevel = 100;
+            const zoomContainer = document.getElementById('zoom-container');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+            const zoomInButton = document.getElementById('zoom-in');
+            const zoomOutButton = document.getElementById('zoom-out');
+            const zoomResetButton = document.getElementById('zoom-reset');
+
+            // Fonction pour appliquer le zoom
+            function applyZoom() {
+                const scale = zoomLevel / 100;
+                zoomContainer.style.transform = `scale(${scale})`;
+                zoomLevelDisplay.textContent = `${zoomLevel}%`;
+
+                // Ajuster la largeur du conteneur pour éviter le défilement horizontal à petites échelles
+                if (scale < 1) {
+                    zoomContainer.style.width = `${100 / scale}%`;
+                } else {
+                    zoomContainer.style.width = '100%';
+                }
+            }
+
+            // Événements pour les boutons de zoom
+            zoomInButton.addEventListener('click', function () {
+                zoomLevel = Math.min(zoomLevel + 10, 200); // Maximum 200%
+                applyZoom();
+            });
+
+            zoomOutButton.addEventListener('click', function () {
+                zoomLevel = Math.max(zoomLevel - 10, 50); // Minimum 50%
+                applyZoom();
+            });
+
+            zoomResetButton.addEventListener('click', function () {
+                zoomLevel = 100;
+                applyZoom();
+            });
+
+            // Support pour le zoom avec la molette de la souris sur l'iframe
+            document.getElementById('preview-container').addEventListener('wheel', function (e) {
+                if (e.ctrlKey) { // Seulement si Ctrl est maintenu
+                    e.preventDefault();
+                    if (e.deltaY < 0) {
+                        zoomLevel = Math.min(zoomLevel + 5, 200);
+                    } else {
+                        zoomLevel = Math.max(zoomLevel - 5, 50);
+                    }
+                    applyZoom();
+                }
+            }, { passive: false });
+
+            // Fonctionnalité de bascule pour mobile
+            const toggleButton = document.getElementById('toggle-preview');
+            if (toggleButton) {
+                toggleButton.addEventListener('click', function () {
+                    const container = document.getElementById('preview-container');
+
+                    if (container.classList.contains('hidden')) {
+                        // Afficher la prévisualisation
+                        container.classList.remove('hidden');
+                        container.classList.add('block', 'h-[80vh]');
+                        toggleButton.innerHTML = '<i class="fas fa-edit mr-2"></i>Retour au formulaire';
+                    } else {
+                        // Masquer la prévisualisation
+                        container.classList.add('hidden');
+                        container.classList.remove('block');
+                        toggleButton.innerHTML = '<i class="fas fa-eye mr-2"></i>Voir la prévisualisation';
+                    }
+                });
+            }
+
+            // Réinitialiser l'affichage si la fenêtre est redimensionnée
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 1024) {
+                    document.getElementById('preview-container').classList.remove('hidden');
+                    document.getElementById('preview-container').classList.add('block');
+                } else {
+                    if (!toggleButton.innerHTML.includes('Retour')) {
+                        document.getElementById('preview-container').classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="Gen-Cv.js"></script>
+</body>
+
+</html>
