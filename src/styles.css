@@ -4,3 +4,40 @@
     font-size: 0.875rem; /* 14px */
     color: #ef4444; /* Rouge */
 }
+.error-message {
+    display: none;
+    /* Masqué par défaut */
+    margin-top: 4px;
+    font-size: 0.875rem;
+    /* 14px */
+    color: #ef4444;
+    /* Rouge */
+}
+
+/* Styles pour la responsivité des onglets */
+.tabs-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
+}
+
+.tab-button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .tabs-container {
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .tabs-container::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, Edge */
+    }
+}
