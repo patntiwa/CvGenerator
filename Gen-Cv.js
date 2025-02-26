@@ -419,6 +419,7 @@ let cvData = {
   });
 
     // Fonction pour le localStorage : Sauvegarde et Récupération
+    
     // Fonction pour sauvegarder les données dans le localStorage
 function saveDataToLocalStorage() {
     localStorage.setItem('cvData', JSON.stringify(cvData));
