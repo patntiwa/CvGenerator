@@ -25,7 +25,6 @@
 <body class="flex justify-center py-5">
     <div class="bg-white p-6 rounded-lg shadow-md md:w-[80%] max-w-4xl m-auto">
         <div id="downloadButtons" class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold text-blue-800 mb-4">Prévisualisation</h2>
             <div class="flex gap-2">
                 <button id="downloadPDF" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
                     hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
@@ -136,7 +135,7 @@
     <script>
         // Fonction pour mettre à jour les informations du CV
         function updateCV(data) {
-            
+
             // Informations personnelles
             document.getElementById('cvPhoto').src = data.photo || 'https://placehold.co/600x400';
             document.getElementById('cvName').textContent = `${data.nom || ''} ${data.prenom || ''}`.trim() || '[Nom Prénom]';
@@ -210,6 +209,14 @@
                 referencesContainer.appendChild(div);
             });
         }
+
+
+        // Mettre à jour le CV avec les données d'exemple
+        window.addEventListener('message', (event) => {
+            if (event.data) {
+                updateCV(event.data); // Utilise la fonction updateCV déjà définie
+            }
+        });
     </script>
 </body>
 

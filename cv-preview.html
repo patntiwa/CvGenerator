@@ -5,225 +5,466 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prévisualisation CV</title>
-    <link rel="stylesheet" href="src/output.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .controls {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            color: white;
+            transition: all 0.3s;
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-blue {
+            background: linear-gradient(to right, #2563eb, #1e40af);
+        }
+
+        .btn-blue:hover {
+            background: linear-gradient(to right, #1d4ed8, #1e3a8a);
+        }
+
+        .btn-green {
+            background: linear-gradient(to right, #16a34a, #166534);
+        }
+
+        .btn-green:hover {
+            background: linear-gradient(to right, #15803d, #14532d);
+        }
+
+        .btn-red {
+            background: linear-gradient(to right, #dc2626, #991b1b);
+        }
+
+        .btn-red:hover {
+            background: linear-gradient(to right, #b91c1c, #7f1d1d);
+        }
+
+        /* Fixed CV dimensions */
+        .cv-container {
+            width: 210mm;
+            /* Format A4 */
+            height: 297mm;
+            /* Format A4 */
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            overflow: hidden;
+        }
+
+        .left-column {
+            width: 70mm;
+            height: 100%;
+            background-color: #111827;
+            color: white;
+            padding: 20px;
+        }
+
+        .right-column {
+            width: 140mm;
+            height: 100%;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .photo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #374151;
+            margin: 0 auto 16px auto;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 4px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .right-section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937;
+            border-bottom: 2px solid #1d4ed8;
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .contact-item {
+            font-size: 14px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-item i {
+            margin-right: 8px;
+            color: #60a5fa;
+        }
+
+        .skills-list,
+        .languages-list {
+            font-size: 14px;
+            margin-top: 8px;
+            padding-left: 0;
+            list-style-type: none;
+        }
+
+        .skills-list li,
+        .languages-list li {
+            margin-bottom: 6px;
+        }
+
+        .experience-item,
+        .education-item {
+            margin-top: 16px;
+        }
+
+        .item-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .item-subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        .item-description {
+            font-size: 14px;
+            color: #374151;
+            margin-top: 4px;
+        }
+
+        .interests-list {
+            list-style-type: disc;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .reference-item {
+            font-size: 14px;
+        }
+
+        .footer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid #1e40af;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         @media print {
             body {
-                padding: 0;
-                margin: 0;
+                background-color: white;
             }
 
-            #downloadButtons {
+            .controls,
+            .footer-controls {
                 display: none;
+            }
+
+            .container {
+                margin: 0;
+                padding: 0;
+            }
+
+            .cv-container {
+                box-shadow: none;
             }
         }
     </style>
 </head>
 
-<body class="flex justify-center py-5">
-    <div class="bg-white p-6 rounded-lg shadow-md md:w-[80%] m-auto">
-        <div id="downloadButtons" class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-semibold text-blue-800 mb-4">Prévisualisation</h2>
-            <div class="flex gap-2">
-                <button id="downloadPDF" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
-                hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
-                shadow-lg hover:shadow-xl transform hover:scale-105">
-                    <i class="fas fa-download mr-2"></i>
+<body>
+    <div class="container">
+        <div class="controls">
+            <h2 style="font-size: 1.125rem; font-weight: 600; color: #1e40af; margin: 0;">Template CV</h2>
+            <div style="display: flex; gap: 0.5rem;">
+                <button id="downloadPDF" class="btn btn-blue">
+                    <i class="fas fa-download"></i>
                     Télécharger PDF
                 </button>
-                <button id="printCV" class="px-6 py-2 bg-gradient-to-r from-green-600 to-green-800 text-white font-semibold rounded-lg 
-            hover:from-green-700 hover:to-green-900 transition-all duration-300 
-            shadow-lg hover:shadow-xl transform hover:scale-105">
-                    <i class="fas fa-print mr-2"></i>
+                <button id="printCV" class="btn btn-green">
+                    <i class="fas fa-print"></i>
                     Imprimer
                 </button>
             </div>
         </div>
-        <div id="cvDocument" class="w-full bg-white shadow-lg rounded-lg overflow-hidden flex flex-col md:flex-row">
-            <!-- Colonne gauche (Infos personnelles, compétences) -->
-            <div class="w-full md:w-1/3 bg-gray-900 text-white p-6">
+
+        <div id="cvDocument" class="cv-container">
+            <!-- Colonne gauche -->
+            <div class="left-column">
                 <!-- Photo de profil -->
-                <div class="text-center">
-                    <img id="cvPhoto" src="https://placehold.co/600x400" alt="Photo de profil"
-                        class="w-[150px] h-[150px] rounded-full mx-auto mb-4 object-cover border-4 border-gray-700">
-                    <h2 id="cvName" class="text-xl font-semibold">[Nom Prénom]</h2>
-                    <p id="cvTitle" class="text-sm text-gray-300 mt-1">[Titre du poste]</p>
+                <div class="photo-container">
+                    <img id="cvPhoto" src="https://placehold.co/600x400" alt="Photo de profil" class="profile-photo">
+                    <h2 id="cvName" style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">[Nom Prénom]</h2>
+                    <p id="cvTitle" style="font-size: 14px; color: #d1d5db; margin-top: 4px;">[Titre du poste]</p>
                 </div>
 
                 <!-- Coordonnées -->
-                <div class="mt-6">
-                    <h3 class="text-lg font-semibold border-b border-gray-700 pb-1">Coordonnées</h3>
-                    <p id="cvAddress" class="text-sm mt-2 flex items-center">
-                        <i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>
-                        [Adresse]
-                    </p>
-                    <p id="cvEmail" class="text-sm mt-2 flex items-center">
-                        <i class="fas fa-envelope mr-2 text-blue-400"></i>
-                        [Email]
-                    </p>
-                    <p id="cvPhone" class="text-sm mt-2 flex items-center">
-                        <i class="fas fa-phone mr-2 text-blue-400"></i>
-                        [Téléphone]
-                    </p>
-                </div>
+                <h3 class="section-title">Coordonnées</h3>
+                <p id="cvAddress" class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    [Adresse]
+                </p>
+                <p id="cvEmail" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    [Email]
+                </p>
+                <p id="cvPhone" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    [Téléphone]
+                </p>
 
                 <!-- Compétences -->
-                <div class="mt-6">
-                    <h3 class="text-lg font-semibold border-b border-gray-700 pb-1">Compétences</h3>
-                    <ul id="cvSkills" class="text-sm mt-2 space-y-2">
-                        <!-- Les compétences seront ajoutées dynamiquement ici -->
-                    </ul>
-                </div>
+                <h3 class="section-title">Compétences</h3>
+                <ul id="cvSkills" class="skills-list">
+                    <!-- Les compétences seront ajoutées dynamiquement -->
+                </ul>
 
                 <!-- Langues -->
-                <div class="mt-6">
-                    <h3 class="text-lg font-semibold border-b border-gray-700 pb-1">Langues</h3>
-                    <ul id="cvLanguages" class="text-sm mt-2 space-y-2">
-                        <!-- Les langues seront ajoutées dynamiquement ici -->
-                    </ul>
-                </div>
+                <h3 class="section-title">Langues</h3>
+                <ul id="cvLanguages" class="languages-list">
+                    <!-- Les langues seront ajoutées dynamiquement -->
+                </ul>
             </div>
 
-            <!-- Colonne droite (Expériences, formations) -->
-            <div class="w-full md:w-2/3 p-6">
+            <!-- Colonne droite -->
+            <div class="right-column">
                 <!-- Description -->
-                <div class="mb-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">À propos</h3>
-                    <p id="cvDescription" class="text-sm text-gray-700 mt-3 leading-relaxed">
-                        [Description personnelle]
-                    </p>
-                </div>
+                <h3 class="right-section-title">À propos</h3>
+                <p id="cvDescription" class="item-description" style="line-height: 1.5;">
+                    [Description personnelle]
+                </p>
 
                 <!-- Expériences professionnelles -->
-                <div>
-                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Expériences
-                        professionnelles</h3>
-                    <div id="cvExperiences" class="mt-3">
-                        <!-- Les expériences seront ajoutées dynamiquement ici -->
-                    </div>
+                <h3 class="right-section-title" style="margin-top: 20px;">Expériences professionnelles</h3>
+                <div id="cvExperiences">
+                    <!-- Les expériences seront ajoutées dynamiquement -->
                 </div>
 
                 <!-- Formations -->
-                <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Formations</h3>
-                    <div id="cvFormations" class="mt-3">
-                        <!-- Les formations seront ajoutées dynamiquement ici -->
-                    </div>
+                <h3 class="right-section-title" style="margin-top: 20px;">Formations</h3>
+                <div id="cvFormations">
+                    <!-- Les formations seront ajoutées dynamiquement -->
                 </div>
 
                 <!-- Centres d'intérêt -->
-                <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Centres d'intérêt
-                    </h3>
-                    <ul id="cvInterests" class="list-disc pl-5 text-sm text-gray-700 mt-3 space-y-1">
-                        <!-- Les centres d'intérêt seront ajoutés dynamiquement ici -->
-                    </ul>
-                </div>
+                <h3 class="right-section-title" style="margin-top: 20px;">Centres d'intérêt</h3>
+                <ul id="cvInterests" class="interests-list">
+                    <!-- Les centres d'intérêt seront ajoutés dynamiquement -->
+                </ul>
 
                 <!-- Références -->
-                <div class="mt-6">
-                    <h3 class="text-xl font-semibold text-gray-800 border-b-2 border-gray-900 pb-2">Références</h3>
-                    <div id="cvReferences" class="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <!-- Les références seront ajoutées dynamiquement ici -->
-                    </div>
+                <h3 class="right-section-title" style="margin-top: 20px;">Références</h3>
+                <div id="cvReferences" class="references-grid">
+                    <!-- Les références seront ajoutées dynamiquement -->
                 </div>
             </div>
         </div>
-        <div class="flex justify-center space-x-4 py-4 border-blue-900  shadow-lg mt-14 border-t">
-            <button id="updateForm" class="px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
-        hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
-        shadow-lg hover:shadow-xl transform hover:scale-105">
+
+        <div class="footer-controls">
+            <button id="updateForm" class="btn btn-blue">
                 Mettre à jour
             </button>
-            <button id="resetForm" class="px-6 py-2 bg-gradient-to-r from-red-600 to-red-800 text-white font-semibold rounded-lg 
-    hover:from-red-700 hover:to-red-900 transition-all duration-300 
-    shadow-lg hover:shadow-xl transform hover:scale-105">
+            <button id="resetForm" class="btn btn-red">
                 Réinitialiser
             </button>
-
         </div>
     </div>
+
     <script>
+        // Clé pour le stockage local
+        const CV_STORAGE_KEY = 'cv_data';
 
         // Fonction pour mettre à jour les informations du CV
         function updateCV(data) {
             // Informations personnelles
             document.getElementById('cvPhoto').src = data.photo || 'https://placehold.co/600x400';
-            document.getElementById('cvName').textContent = `${data.nom || ''} ${data.prenom || ''}`.trim() || '[Nom Prénom]';
-            document.getElementById('cvTitle').textContent = data.title || '[Titre du poste]';
-            document.getElementById('cvDescription').textContent = data.description || '[Description personnelle]';
-            document.getElementById('cvAddress').innerHTML = `<i class="fas fa-map-marker-alt mr-2 text-blue-400"></i>${data.adresse || '[Adresse]'}`;
-            document.getElementById('cvEmail').innerHTML = `<i class="fas fa-envelope mr-2 text-blue-400"></i>${data.email || '[Email]'}`;
-            document.getElementById('cvPhone').innerHTML = `<i class="fas fa-phone mr-2 text-blue-400"></i>${data.telephone || '[Téléphone]'}`;
+            document.getElementById('cvName').textContent = `${data.nom} ${data.prenom}`;
+            document.getElementById('cvTitle').textContent = data.title;
+            document.getElementById('cvDescription').textContent = data.description;
+            document.getElementById('cvAddress').innerHTML = '<i class="fas fa-map-marker-alt"></i> ' + data.address;
+            document.getElementById('cvEmail').innerHTML = '<i class="fas fa-envelope"></i> ' + data.email;
+            document.getElementById('cvPhone').innerHTML = '<i class="fas fa-phone"></i> ' + data.phone;
 
             // Compétences
-            const skillsContainer = document.getElementById('cvSkills');
-            skillsContainer.innerHTML = '';
-            (data.competences || []).forEach(skill => {
-                const li = document.createElement('li');
-                li.textContent = skill;
-                skillsContainer.appendChild(li);
-            });
-
-            // Langues
-            const languagesContainer = document.getElementById('cvLanguages');
-            languagesContainer.innerHTML = '';
-            (data.langues || []).forEach(language => {
-                const li = document.createElement('li');
-                li.textContent = language;
-                languagesContainer.appendChild(li);
-            });
+            const skillsList = document.getElementById('cvSkills');
+            skillsList.innerHTML = data.competences.map(skill => `<li>${skill}</li>`).join('');
 
             // Expériences professionnelles
-            const experiencesContainer = document.getElementById('cvExperiences');
-            experiencesContainer.innerHTML = '';
-            (data.experiences || []).forEach(exp => {
-                const div = document.createElement('div');
-                div.classList.add('mb-4');
-                div.innerHTML = `<h4 class="text-lg font-semibold">${exp.poste || '[Poste]'}</h4>
-                                 <p class="text-sm text-gray-600">${exp.entreprise || '[Entreprise]'}</p>
-                                 <p class="text-sm text-gray-600">${exp.duree || '[Durée]'}</p>
-                                 <p class="text-sm text-gray-700 mt-2">${exp.description || '[Description]'}</p>`;
-                experiencesContainer.appendChild(div);
-            });
+            const experiencesList = document.getElementById('cvExperiences');
+            experiencesList.innerHTML = data.experiences.map(exp => `
+                <div class="experience-item">
+                    <h4 class="item-title">${exp.poste}</h4>
+                    <p class="item-subtitle">${exp.entreprise} | ${exp.debut} - ${exp.fin}</p>
+                    <p class="item-description">${exp.description}</p>
+                </div>
+            `).join('');
 
             // Formations
-            const formationsContainer = document.getElementById('cvFormations');
-            formationsContainer.innerHTML = '';
-            (data.formations || []).forEach(formation => {
-                const div = document.createElement('div');
-                div.classList.add('mb-4');
-                div.innerHTML = `<h4 class="text-lg font-semibold">${formation.diplome || '[Diplôme]'}</h4>
-                                 <p class="text-sm text-gray-600">${formation.ecole || '[École]'}</p>
-                                 <p class="text-sm text-gray-600">${formation.duree || '[Durée]'}</p>`;
-                formationsContainer.appendChild(div);
-            });
+            const formationsList = document.getElementById('cvFormations');
+            formationsList.innerHTML = data.formations.map(formation => `
+                <div class="education-item">
+                    <h4 class="item-title">${formation.diplome}</h4>
+                    <p class="item-subtitle">${formation.ecole} | ${formation.anneeDebut} - ${formation.anneeFin}</p>
+                </div>
+            `).join('');
 
             // Centres d'intérêt
-            const interestsContainer = document.getElementById('cvInterests');
-            interestsContainer.innerHTML = '';
-            (data.interets || []).forEach(interest => {
-                const li = document.createElement('li');
-                li.textContent = interest;
-                interestsContainer.appendChild(li);
-            });
+            const interestsList = document.getElementById('cvInterests');
+            interestsList.innerHTML = data.interets.map(interet => `<li>${interet}</li>`).join('');
+
+            // Langues
+            const languagesList = document.getElementById('cvLanguages');
+            languagesList.innerHTML = data.langues.map(langue => `<li>${langue}</li>`).join('');
 
             // Références
-            const referencesContainer = document.getElementById('cvReferences');
-            referencesContainer.innerHTML = '';
-            (data.references || []).forEach(reference => {
-                const div = document.createElement('div');
-                div.classList.add('mb-4');
-                div.innerHTML = `<h4 class="text-lg font-semibold">${reference.nom || '[Nom]'}</h4>
-                                 <p class="text-sm text-gray-600">${reference.poste || '[Poste]'}</p>
-                                 <p class="text-sm text-gray-600">${reference.contact || '[Contact]'}</p>`;
-                referencesContainer.appendChild(div);
-            });
+            const referencesList = document.getElementById('cvReferences');
+            referencesList.innerHTML = data.references.map(ref => `
+                <div class="reference-item">
+                    <h4 class="item-title">${ref.nom}</h4>
+                    <p class="item-subtitle">${ref.entreprise} - ${ref.ville}</p>
+                    <p class="item-description">📞 ${ref.telephone} | ✉️ ${ref.email}</p>
+                </div>
+            `).join('');
+
+            // Sauvegarder les données dans le localStorage
+            saveToLocalStorage(data);
         }
 
-        // Exemple de données (à remplacer par les données du formulaire)
+        // Fonction pour sauvegarder les données dans le localStorage
+        function saveToLocalStorage(data) {
+            try {
+                localStorage.setItem(CV_STORAGE_KEY, JSON.stringify(data));
+                console.log('CV data saved to localStorage');
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+
+        // Fonction pour récupérer les données du localStorage
+        function loadFromLocalStorage() {
+            try {
+                const savedData = localStorage.getItem(CV_STORAGE_KEY);
+                if (savedData) {
+                    return JSON.parse(savedData);
+                }
+            } catch (error) {
+                console.error('Error loading from localStorage:', error);
+            }
+            return null;
+        }
+
+        // Configuration des boutons
+        document.getElementById('downloadPDF').addEventListener('click', function () {
+            const element = document.getElementById('cvDocument');
+            const opt = {
+                margin: 0,
+                filename: 'mon-cv.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save()
+            .then(() => {
+            // Restaurer le bouton
+            button.innerHTML = originalText;
+            button.disabled = false;
+        })
+        .catch(err => {
+            console.error('Erreur lors de la génération du PDF:', err);
+            button.innerHTML = originalText;
+            button.disabled = false;
+            alert('Une erreur est survenue lors de la génération du PDF.');
+        });
+        });
+
+        document.getElementById('printCV').addEventListener('click', function () {
+            window.print();
+        });
+
+        // Bouton de mise à jour
+        document.getElementById('updateForm').addEventListener('click', function () {
+            // Envoyer un message au parent pour demander une mise à jour des données
+            window.parent.postMessage('requestUpdate', '*');
+        });
+
+        // Bouton de réinitialisation
+        document.getElementById('resetForm').addEventListener('click', function () {
+            if (confirm('Êtes-vous sûr de vouloir réinitialiser les données du CV ?')) {
+                localStorage.removeItem(CV_STORAGE_KEY);
+                location.reload();
+            }
+        });
+
+        // Exemple de données (à utiliser si rien n'est trouvé dans le localStorage)
         const exampleData = {
             photo: '',
             nom: 'Dupont',
@@ -264,6 +505,26 @@
             ]
         };
 
+        // Initialisation du CV
+        window.addEventListener('DOMContentLoaded', function () {
+            // Essayer de charger les données du localStorage d'abord
+            const savedData = loadFromLocalStorage();
+
+            if (savedData) {
+                // Utiliser les données sauvegardées
+                updateCV(savedData);
+            } else {
+                // Utiliser les données d'exemple
+                updateCV(exampleData);
+            }
+        });
+
+        // Écouter les messages pour mettre à jour le CV
+        window.addEventListener('message', (event) => {
+            if (event.data && typeof event.data === 'object') {
+                updateCV(event.data);
+            }
+        });
     </script>
 </body>
 
