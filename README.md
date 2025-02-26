@@ -79,9 +79,8 @@ Les contributions sont bienvenues ! Voici comment vous pouvez participer :
 
 Si vous avez des questions ou des suggestions, n'hésitez pas à me contacter :
 
-- **Email :** [patntiwa19@gmail.com](mailto:patntiwa19@gmail.com)
-- **LinkedIn :** [[https://www.linkedin.com/in/patrick-longchy/]](#)
-- **GitHub :** [Lien vers votre profil GitHub](#)
+- **Email :** [patntiwa19@gmail.com](mailto:patntiwa19@gmail.com) & [emmanueldylan237@gmail.com](mailto:emmanueldylan237@gmail.com) 
+- **LinkedIn :** [[https://www.linkedin.com/in/patrick-longchy/]](#) &
 
 ## Remerciements
 
