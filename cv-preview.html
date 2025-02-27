@@ -161,7 +161,7 @@
 
             // Langues
             const languagesList = document.getElementById('cvLanguages');
-            languagesList.innerHTML = data.langues.map(langue => `<li>${langue}</li>`).join('');
+            languagesList.innerHTML = data.langues.map(langue => `<li>${langue} (${niveau})</li>`).join('');
 
             // Références
             const referencesList = document.getElementById('cvReferences');

@@ -344,41 +344,49 @@ document
 document
   .getElementById("button-add-language")
   .addEventListener("click", function () {
-    const language = document.getElementById("input-language");
-    const Level = document.querySelector(
-      'select[name="select-level-language"]'
-    );
-    const langue = select.options[select.selectedIndex].text;
+    const langue = document.getElementById("input-language").value;
+    const niveau = document.querySelector(
+      '[name="select-level-language"]'
+    ).value;
 
-    if (langue && langue !== "Choisissez") {
-      cvData.langues.push(langue);
+    if (langue && niveau) {
+      cvData.langues.push(`${langue} (${niveau})`);
 
       // Création d'un élément visuel pour la langue ajoutée
       const languageList = document.createElement("div");
       languageList.className =
         "mt-2 p-2 bg-blue-50 rounded-md flex justify-between";
       languageList.innerHTML = `
-              <span>${language} (${langue})</span>
-              <button class="delete-language text-red-500 hover:text-red-700" data-index="${
-                cvData.langues.length - 1
-              }">
-                  <i class="fas fa-trash"></i>
-              </button>
+              <span>${langue} (${niveau})</span>
+              <div>
+                  <button class="modify-language text-orange-500 hover:text-orange-700" data-index="${
+                    cvData.langues.length - 1
+                  }">
+                      <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="delete-language text-red-500 hover:text-red-700" data-index="${
+                    cvData.langues.length - 1
+                  }">
+                      <i class="fas fa-trash"></i>
+                  </button>
+              </div>
           `;
 
       document.getElementById("language-section").appendChild(languageList);
 
-      // Réinitialiser le champ
-      select.selectedIndex = 0;
+      // Réinitialiser les champs
+      document.getElementById("input-language").value = "";
+      document.querySelector('[name="select-level-language"]').value = "";
 
       showNotification("Langue ajoutée avec succès!");
-
       updatePreview();
     } else {
-      showNotification("Veuillez sélectionner une langue", "error");
+      showNotification(
+        "Veuillez sélectionner une langue et un niveau",
+        "error"
+      );
     }
   });
-
 // Fonction pour afficher une notification
 function showNotification(message, type = "success") {
   // Créer l'élément de notification
