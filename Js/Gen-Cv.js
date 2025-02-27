@@ -52,7 +52,10 @@ function handlePersonalInfoChange() {
   cvData.phone = document.getElementById("input-personal-phone").value;
   cvData.sexe = document.getElementById("select-personal-gender").value;
   cvData.age = document.getElementById("input-personal-age").value;
-  cvData.langue = document.getElementById("input-language").value;
+  cvData.languageInput = document.getElementById("input-language").value;
+  cvDatalanguageLevelSelect = document.querySelector(
+    'select[name="select-level-language"]'
+  ).value;
   cvData.statut = document.getElementById("input-personal-situation").value;
 
   updatePreview();
@@ -341,7 +344,10 @@ document
 document
   .getElementById("button-add-language")
   .addEventListener("click", function () {
-    const select = document.querySelector('[name="select-language-name"]');
+    const language = document.getElementById("input-language");
+    const Level = document.querySelector(
+      'select[name="select-level-language"]'
+    );
     const langue = select.options[select.selectedIndex].text;
 
     if (langue && langue !== "Choisissez") {
@@ -352,7 +358,7 @@ document
       languageList.className =
         "mt-2 p-2 bg-blue-50 rounded-md flex justify-between";
       languageList.innerHTML = `
-              <span>${langue}</span>
+              <span>${language} (${langue})</span>
               <button class="delete-language text-red-500 hover:text-red-700" data-index="${
                 cvData.langues.length - 1
               }">
@@ -364,10 +370,11 @@ document
 
       // Réinitialiser le champ
       select.selectedIndex = 0;
+
       showNotification("Langue ajoutée avec succès!");
+
       updatePreview();
     } else {
-      alert("Veuillez sélectionner une langue.");
       showNotification("Veuillez sélectionner une langue", "error");
     }
   });
