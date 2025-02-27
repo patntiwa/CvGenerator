@@ -1,422 +1,469 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Resume Page</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- custom css -->
-        <link rel="stylesheet" href="assets/css/main.css">
-    </head>
-    <body>
-        <!-- <nav class = "navbar bg-white">
-            <div class="container">
-                <div class = "navbar-content">
-                    <div class = "brand-and-toggler">
-                        <a href = "index.html" class = "navbar-brand">
-                            <img src = "assets/images/curriculum-vitae.png" alt = "" class = "navbar-brand-icon">
-                            <span class = "navbar-brand-text">build <span>resume.</span>
-                        </a>
-                        <button type = "button" class = "navbar-toggler-btn">
-                            <div class = "bars">
-                                <div class = "bar"></div>
-                                <div class = "bar"></div>
-                                <div class = "bar"></div>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cv Generateur</title>
+    <link rel="stylesheet" href="src/output.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+    <header class="border-b-2 border-blue-900 mb-5 shadow-lg bg-white">
+        <div class="flex items-center justify-center space-x-2.5 py-4">
+            <img src="img/curriculum-vitae.png" alt="cv" class="w-[30px] h-auto">
+            <h1 class="text-xl font-bold text-center uppercase text-blue-900">Générateur de CV</h1>
+        </div>
+    </header>
+    <div class="w-full mx-auto p-2">
+        <div class="flex flex-col lg:flex-row gap-8 p-6">
+
+            <!-- Section Formulaire -->
+            <div class="p-6 rounded-lg w-full lg:w-[40%] bg-white shadow-xl">
+                <h2
+                    class="bg-gradient-to-r from-blue-600 to-blue-800 text-xl md:text-2xl p-3 rounded-lg font-bold mb-6 text-white shadow-md">
+                    Formulaire de CV
+                </h2>
+                <form id="cvForm" class="space-y-6">
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Informations Personnelles
+                        </h3>
+                        <div id="infopersonnel" class="space-y-4">
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="file-personal-photo">Photo</label>
+                                <input type="file" id="file-personal-photo" accept=".jpg, .jpeg, .png"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100 text-gray-950">
+                                <p class="text-gray-500 text-xs">Formats acceptés : JPG, JPEG, PNG.</p>
                             </div>
+                            <div class="w-full flex space-x-2 mt-1">
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium" for="input-personal-lastname">Nom de
+                                        famille</label>
+                                    <input type="text" id="input-personal-lastname"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                        required>
+                                        <span id="error-personal-lastname" class="error-message text-red-500 text-sm"></span>
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium"
+                                        for="input-personal-firstname">Prénom</label>
+                                    <input type="text" id="input-personal-firstname"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="w-full flex space-x-2 mt-1">
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium"
+                                        for="input-personal-age">Âge</label>
+                                    <input type="text" id="input-personal-age"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                        required>
+                                </div>
+                                <div class="w-1/2">
+                                    <label class="block text-sm font-medium" for="select-personal-gender">Sexe</label>
+                                    <select name="sexe" id="select-personal-gender"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                        <option value="M">Masculin</option>
+                                        <option value="F">Féminin</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-email">Email</label>
+                                <input type="email" id="input-personal-email"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100m"
+                                    required>
+                                    <span id="error-personal-email" class="error-message text-red-500 text-sm"></span>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-phone">Téléphone</label>
+                                <input type="tel" id="input-personal-phone"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-address">Adresse</label>
+                                <input type="text" id="input-personal-address"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-title">Titre du
+                                    poste</label>
+                                <input type="text" id="input-personal-title"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium"
+                                    for="textarea-personal-description">Description</label>
+                                <textarea type="text" id="textarea-personal-description" class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500"></textarea>
+                            </div>
+
+                            <div class="mt-1">
+                                <label class="block text-sm font-medium" for="input-personal-situation">Situation
+                                    Actuelle</label>
+                                <input type="text" id="input-personal-situation"
+                                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                    required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Expériences Professionnelles -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Expériences professionnelles
+                        </h3>
+                        <div id="experience-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium" for="input-experience-jobtitle">Poste
+                                        Occupé</label>
+                                    <input type="text" id="input-experience-jobtitle" class="mt-1 block w-full p-2 rounded-md bg-gray-100 border-gray-300 shadow-sm ">
+                                    <span id="error-experience-jobtitle" class="error-message text-red-500 text-sm"></span>
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium  pb-1" for="input-experience-company">Nom De
+                                        l'Entreprise</label>
+                                    <input type="text" id="input-experience-company"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium pb-1">Période</label>
+                                    <div class="flex gap-2">
+                                        <div class="w-1/2">
+                                            <label class="block text-sm font-medium"
+                                                for="input-experience-startdate">Début</label>
+                                            <input type="date" id="input-experience-startdate"
+                                                class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm"
+                                                required>
+                                        </div>
+                                        <div class="w-1/2">
+                                            <label class="block text-sm font-medium"
+                                                for="input-experience-enddate">Fin</label>
+                                            <input type="date" id="input-experience-enddate"
+                                                class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium pb-1"
+                                        for="textarea-experience-description">Description</label>
+                                    <textarea id="textarea-experience-description"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm"></textarea>
+                                </div>
+                                <div class="mt-3">
+                                    <button type="button" id="button-add-experiencee" class=" px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                        hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                        shadow-lg hover:shadow-xl transform hover:scale-105">
+                                        Ajouter une expérience
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formation -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Formation</h3>
+                        <div id="education-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div>
+                                    <label class="block text-sm font-medium" for="input-education-degree">Diplôme
+                                        Obtenus</label>
+                                    <input type="text" name="input-education-degree" title="Diplôme Obtenus"
+                                        placeholder="Entrez le diplôme obtenu"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm">
+                                </div>
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium" for="input-education-school">École</label>
+                                    <input type="text" name="input-education-school" title="École"
+                                        placeholder="Entrez le nom de l'école"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm">
+                                </div>
+                                <div class="flex justify-between mt-2 gap-2">
+                                    <div class="w-1/2">
+                                        <label class="block text-sm font-medium" for="input-education-startdate">Année
+                                            de debut</label>
+                                        <input type="date" name="input-education-startdate" title="Année de debut"
+                                            placeholder="Entrez l'année de debut"
+                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm ">
+
+                                    </div>
+                                    <div class="w-1/2">
+                                        <label class="block text-sm font-medium" for="input-education-enddate">Année de
+                                            fin</label>
+                                        <input type="date" name="input-education-enddate" title="Année de fin"
+                                            placeholder="Entrez l'année de fin"
+                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 bg-gray-100 shadow-sm ">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="button-add-education" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                            hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                            shadow-lg hover:shadow-xl transform hover:scale-105">
+                            Ajouter une formation
                         </button>
                     </div>
-                </div>
-            </div>
-        </nav> -->
 
-        <section id = "about-sc" class = "">
-            <div class = "container">
-                <div class = "about-cnt">
-                    <form action="" class="cv-form" id = "cv-form">
-                        <!-- Informations personnelles -->
-                        <div class = "cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>Coordonnées</h3>
-                            </div>
-                            <div class = "cv-form-row cv-form-row-about">
-                                <div class = "cols-3">
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Noms</label>
-                                        <input name = "noms" type = "text" class = "form-control noms" id = "" onkeyup="generateCV()" placeholder="ex: Ntiwa">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Prénoms</label>
-                                        <input name = "prenoms" type = "text" class = "form-control prenoms" id = "" onkeyup="generateCV()" placeholder="ex: Emmanuel">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Sexe</label>
-                                        <input name = "sexe" type = "text" class = "form-control sexe" id = "" onkeyup="generateCV()" placeholder="ex: Masculin">
-                                        <span class="form-text"></span>
-                                    </div>
+                    <!-- Compétences -->
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Compétences
+                        </h3>
+                        <div id="skill-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div class="mt-2">
+                                    <label class="block text-sm font-medium" for="input-skill-name">Compétence</label>
+                                    <input type="text" name="input-skill-name" title="Compétence"
+                                        placeholder="Entrez une compétence"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100">
                                 </div>
-
-                                <div class="cols-3">
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Photo de profil</label>
-                                        <input name = "image" type = "file" class = "form-control image" id = "" accept = "image/*" onchange="previewImage()">
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Age</label>
-                                        <input name = "age" type = "text" class = "form-control age" id = "" onkeyup="generateCV()" placeholder="ex: 35ans">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Addresse</label>
-                                        <input name = "addresse" type = "text" class = "form-control addresse" id = "" onkeyup="generateCV()" placeholder="ex: Feu rouge Bessengue">
-                                        <span class="form-text"></span>
-                                    </div>
-                                </div>
-
-                                <div class = "cols-3">
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Email</label>
-                                        <input name = "email[]" type = "text" class = "form-control email" id = "" onkeyup="generateCV()" placeholder="ex: emmanuelpatrick011@gmail.com">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Téléphone:</label>
-                                        <input name = "telephone[]" type = "text" class = "form-control telephone" id = "" onkeyup="generateCV()" placeholder="ex: 6 94 56 76 87/ 6 95 67 65 42">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Situation actuelle</label>
-                                        <input name = "situation actuelle" type = "text" class = "form-control situation actuelle" id = "" onkeyup="generateCV()" placeholder="ex: à la recherche d'emplois">
-                                        <span class="form-text"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Expériences proféssionelles -->
-                        <div class="cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>Expériences Proféssionnelles</h3>
-                            </div>
-
-                            <div class = "row-separator repeater">
-                                <div class = "repeater" data-repeater-list = "group-b">
-                                    <div data-repeater-item>
-                                        <div class = "cv-form-row cv-form-row-experience">
-                                            <div class = "cols-3">
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Poste</label>
-                                                    <input name = "exp_poste[]" type = "text" class = "form-control exp_poste" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Entrprise</label>
-                                                    <input name = "exp_entreprise[]" type = "text" class = "form-control exp_entreprise" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Période</label>
-                                                    <input name = "exp_periode[]" type = "text" class = "form-control exp_periode[]" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class = "cols-3">
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Date de debut</label>
-                                                    <input name = "exp_start_date" type = "date" class = "form-control exp_start_date" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Date de fin</label>
-                                                    <input name = "exp_end_date" type = "date" class = "form-control exp_end_date" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Description</label>
-                                                    <input name = "exp_description" type = "text" class = "form-control exp_description" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                            </div>
-
-                                            <button data-repeater-delete type = "button" class = "repeater-remove-btn">-</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type = "button" data-repeater-create value = "Add" class = "repeater-add-btn">+</button>
-                            </div>
-                        </div>
-
-                            <!-- Formations -->
-                        <div class="cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>Formations</h3>
-                            </div>
-
-                            <div class = "row-separator repeater">
-                                <div class = "repeater" data-repeater-list = "group-c">
-                                    <div data-repeater-item>
-                                        <div class = "cv-form-row cv-form-row-experience">
-                                            <div class = "cols-3">
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Diplome</label>
-                                                    <input name = "edu_diplome[]" type = "text" class = "form-control edu_diplome" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Etablissement</label>
-                                                    <input name = "edu_city[]" type = "text" class = "form-control edu_city" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                            </div>
-
-                                            <div class = "cols-3">
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Date de debut</label>
-                                                    <input name = "edu_start_date[]" type = "date" class = "form-control edu_start_date" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                                <div class = "form-elem">
-                                                    <label for = "" class = "form-label">Date de fin</label>
-                                                    <input name = "edu_graduation_date" type = "date" class = "form-control edu_graduation_date" id = "" onkeyup="generateCV()">
-                                                    <span class="form-text"></span>
-                                                </div>
-                                            </div>
-
-                                            <button data-repeater-delete type = "button" class = "repeater-remove-btn">-</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type = "button" data-repeater-create value = "Add" class = "repeater-add-btn">+</button>
-                            </div>
-                        </div>
-
-                        <!-- Compétences -->
-                        <div class="cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>Compétences</h3>
-                            </div>
-
-                            <div class = "row-separator repeater">
-                                <div class = "repeater" data-repeater-list = "group-e">
-                                    <div data-repeater-item>
-                                        <div class = "cv-form-row cv-form-row-skills">
-                                            <div class = "form-elem">
-                                                <label for = "" class = "form-label">Compétence</label>
-                                                <input name = "skill[]" type = "text" class = "form-control skill" id = "" onkeyup="generateCV()">
-                                                <span class="form-text"></span>
-                                            </div>
-                                            
-                                            <button data-repeater-delete type = "button" class = "repeater-remove-btn">-</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type = "button" data-repeater-create value = "Add" class = "repeater-add-btn">+</button>
-                            </div>
-                        </div>
-
-                        <!-- Références -->
-                        <div class = "cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>Références</h3>
-                            </div>
-                            <div class = "cv-form-row cv-form-row-about">
-                                <div class = "cols-3">
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Noms</label>
-                                        <input name = "noms[]" type = "text" class = "form-control noms" id = "" onkeyup="generateCV()" placeholder="ex: Ntiwa">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Prénoms</label>
-                                        <input name = "prenoms[]" type = "text" class = "form-control prenoms" id = "" onkeyup="generateCV()" placeholder="ex: Emmanuel">
-                                        <span class="form-text"></span>
-                                    </div>
-                                </div>
-
-                                <div class="cols-3">
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Addresse</label>
-                                        <input name = "addresse[]" type = "text" class = "form-control addresse" id = "" onkeyup="generateCV()" placeholder="ex: Feu rouge Bessengue">
-                                        <span class="form-text"></span>
-                                    </div>
-                                </div>
-
-                                <div class = "cols-3">
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Email</label>
-                                        <input name = "email[]" type = "text" class = "form-control email" id = "" onkeyup="generateCV()" placeholder="ex: emmanuelpatrick011@gmail.com">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Téléphone:</label>
-                                        <input name = "telephone[]" type = "text" class = "form-control telephone" id = "" onkeyup="generateCV()" placeholder="ex: 6 94 56 76 87/ 6 95 67 65 42">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Proféssion</label>
-                                        <input name = "profession[]" type = "text" class = "form-control profession" id = "" onkeyup="generateCV()" placeholder="ex: DG Eneo">
-                                        <span class="form-text"></span>
-                                    </div>
-                                    <div class = "form-elem">
-                                        <label for = "" class = "form-label">Nom de la compagnie</label>
-                                        <input name = "compagnie[]" type = "text" class = "form-control compagnie" id = "" onkeyup="generateCV()" placeholder="ex: Eneo">
-                                        <span class="form-text"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Langues -->
-                        <div class="cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>Langues</h3>
-                            </div>
-
-                            <div class = "row-separator repeater">
-                                <div class = "repeater" data-repeater-list = "group-e">
-                                    <div data-repeater-item>
-                                        <div class = "cv-form-row cv-form-row-skills">
-                                            <div class = "form-elem">
-                                                <label for = "" class = "form-label">Langue</label>
-                                                <input name = "language[]" type = "text" class = "form-control language" id = "" onkeyup="generateCV()">
-                                                <span class="form-text"></span>
-                                            </div>
-                                            
-                                            <button data-repeater-delete type = "button" class = "repeater-remove-btn">-</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type = "button" data-repeater-create value = "Add" class = "repeater-add-btn">+</button>
-                            </div>
-                        </div>
-
-                        <!-- Centres d'intérêts -->
-                        <div class="cv-form-blk">
-                            <div class = "cv-form-row-title">
-                                <h3>Centres d'intérêts</h3>
-                            </div>
-
-                            <div class = "row-separator repeater">
-                                <div class = "repeater" data-repeater-list = "group-e">
-                                    <div data-repeater-item>
-                                        <div class = "cv-form-row cv-form-row-skills">
-                                            <div class = "form-elem">
-                                                <label for = "" class = "form-label">Intérêts</label>
-                                                <input name = "interest[]" type = "text" class = "form-control interest" id = "" onkeyup="generateCV()">
-                                                <span class="form-text"></span>
-                                            </div>
-                                            
-                                            <button data-repeater-delete type = "button" class = "repeater-remove-btn">-</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button type = "button" data-repeater-create value = "Add" class = "repeater-add-btn">+</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <section id = "preview-sc" class = "print_area">
-            <div class = "container">
-                <div class = "preview-cnt">
-                    <div class = "preview-cnt-l bg-green text-white">
-                        <div class = "preview-blk">
-                            <div class = "preview-image">
-                                <img src = "" alt = "" id = "image_dsp"> 
-                            </div>
-                            <div class = "preview-item preview-item-name">
-                                <span class = "preview-item-val fw-6" id = "fullname_dsp"></span>
-                            </div>
-                            <div class = "preview-item">
-                                <span class = "preview-item-val text-uppercase fw-6 ls-1" id = "designation_dsp"></span>
-                            </div>
-                        </div>
-
-                        <div class = "preview-blk">
-                            <div class = "preview-blk-title">
-                                <h3>Profil</h3>
-                            </div>
-                            <div class = "preview-blk-list">
-                                <div class = "preview-item">
-                                    <span class = "preview-item-val" id = "telephone"></span>
-                                </div>
-                                <div class = "preview-item">
-                                    <span class = "preview-item-val" id = "email_dsp"></span>
-                                </div>
-                                <div class = "preview-item">
-                                    <span class = "preview-item-val" id = "addresse_dsp"></span>
-                                </div>
-                                <div class = "preview-item">
-                                    <span class = "preview-item-val" id = "status_dsp"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "preview-blk">
-                            <div class = "preview-blk-title">
-                                <h3>Compétences</h3>
-                            </div>
-                            <div class = "skills-items preview-blk-list" id = "skills_dsp">
-                                <!-- skills list here -->
+                                <button type="button" id="button-add-skill" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                    hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                    shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter une compétence
+                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <div class = "preview-cnt-r bg-white">
-                        <div class = "preview-blk">
-                            <div class = "preview-blk-title">
-                                <h3>Achievements</h3>
-                            </div>
-                            <div class = "achievements-items preview-blk-list" id = "achievements_dsp"></div>
-                        </div>
+                
 
-                        <div class = "preview-blk">
-                            <div class = "preview-blk-title">
-                                <h3>educations</h3>
-                            </div>
-                            <div class = "educations-items preview-blk-list" id = "educations_dsp"></div>
-                        </div>
+                    <!-- Références -->
 
-                        <div class = "preview-blk">
-                            <div class = "preview-blk-title">
-                                <h3>experiences</h3>
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Réferences
+                        </h3>
+                        <div id="reference-section" class="space-y-4">
+                            <div class="reference-entry p-3 rounded">
+                                <div id="" class="flex flex-col">
+                                    <div class="py-2 ">
+                                        <div class="">
+                                            <div class="flex items-center mb-1">
+                                                <label for="input-reference-name"
+                                                    class="flex-grow truncate block font-medium text-gray-600 text-sm">Noms</label>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                            <input id="input-reference-name" data-s="input-reference-name" type="text"
+                                                size="1" autocomplete="off" maxlength="1000"
+                                                class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                value="">
+                                        </div>
+                                    </div>
+                                    <div class="py-2 ">
+                                        <div class="">
+                                            <div class="flex items-center mb-1">
+                                                <label for="input-reference-lastname"
+                                                    class="flex-grow truncate block font-medium text-gray-600 text-sm">Prénoms</label>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                            <input id="input-reference-lastname" data-s="input-reference-lastname" type="text"
+                                                size="1" autocomplete="off" maxlength="1000"
+                                                class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                value="">
+                                        </div>
+                                    </div>
+                                    <div class="py-2 ">
+                                        <div class="">
+                                            <div class="flex items-center mb-1">
+                                                <label for="input-reference-profetion"
+                                                    class="flex-grow truncate block font-medium text-gray-600 text-sm">Proféssion</label>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                            <input id="input-reference-profetion" data-s="input-reference-profetion" type="text"
+                                                size="1" autocomplete="off" maxlength="1000"
+                                                class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                value="">
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-wrap -mx-2">
+                                        <div class="w-full sm:flex-equal-width px-2">
+                                            <div class="py-2 ">
+                                                <div class="">
+                                                    <div class="flex items-center mb-1">
+                                                        <label for="input-reference-company"
+                                                            class="flex-grow truncate block font-medium text-gray-600 text-sm">Entreprise</label>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                    <input id="input-reference-company" data-s="Entreprise" type="text"
+                                                        size="1" autocomplete="off" maxlength="1000"
+                                                        class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-full sm:flex-equal-width px-2">
+                                            <div class="py-2 ">
+                                                <div class="">
+                                                    <div class="flex items-center mb-1">
+                                                        <label for="input-reference-city"
+                                                            class="flex-grow truncate block font-medium text-gray-600 text-sm">Ville</label>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                    <input id="input-reference-city" data-s="Ville" type="text" size="1"
+                                                        autocomplete="off" maxlength="1000"
+                                                        class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="w-full sm:flex-equal-width px-2">
+                                        <div class="py-2 ">
+                                            <div class="">
+                                                <div class="flex items-center mb-1">
+                                                    <label for="input-reference-email"
+                                                        class="flex-grow truncate block font-medium text-gray-600 text-sm">Adresse
+                                                        e-mail</label>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                <input id="input-reference-email" data-s="Adresse e-mail"
+                                                    type="text" size="1" title="Adresse e-mail"
+                                                    placeholder="Entrez l'adresse e-mail" autocomplete="off"
+                                                    maxlength="1000"
+                                                    class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                    value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-wrap -mx-2">
+                                        <div class="w-full sm:flex-equal-width px-2">
+                                            <div class="py-2 ">
+                                                <div class="">
+                                                    <div class="flex items-center mb-1">
+                                                        <label for="input-reference-phone"
+                                                            class="flex-grow truncate block font-medium text-gray-600 text-sm">Numéro
+                                                            de téléphone</label>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="relative flex flex-row border focus-within:border-brand-400 focus-within:bg-brand-50 rounded text-gray-800 border-transparent bg-gray-100  ">
+                                                    <input id="input-reference-phone" data-s="Numéro de téléphone"
+                                                        type="text" size="1" autocomplete="off" maxlength="1000"
+                                                        class="flex-1 appearance-none outline-none rounded  ltr py-2 ps-3 text-base pe-3  bg-transparent"
+                                                        value="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" id="button-add-reference" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                    hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                    shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter une référence
+                                </button>
                             </div>
-                            <div class = "experiences-items preview-blk-list" id = "experiences_dsp"></div>
-                        </div>
-
-                        <div class = "preview-blk">
-                            <div class = "preview-blk-title">
-                                <h3>projects</h3>
-                            </div>
-                            <div class = "projects-items preview-blk-list" id = "projects_dsp"></div>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Langue -->
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Langues
+                        </h3>
+                        <div id="language-section" class="space-y-4">
+                            <div class="language-entry p-3 rounded">
+                                <div class="w-full flex space-x-2 mt-1">
+                                    <div class="w-1/2">
+                                        <label class="block text-sm font-medium text-gray-600"
+                                            for="input-language">Langue</label>
+                                        <input type="text" id="input-language"
+                                            class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100"
+                                            required>
+                                    </div>
+                                    <div class="w-1/2">
+                                        <label class="block text-sm font-medium text-gray-600"
+                                        for="select-language-name">Niveau</label>
+                                    <select name="select-level-language" title="Niveau"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                        <option value="" class="bg-white text-gray-400">Choisissez</option>
+                                        <option value="beginner" class="bg-white text-gray-800">Débutant</option>
+                                        <option value="moderate" class="bg-white text-gray-800">Intermédiaire</option>
+                                        <option value="good" class="bg-white text-gray-800">Bien</option>
+                                        <option value="veryGood" class="bg-white text-gray-800">Très bien</option>
+                                        <option value="fluent" class="bg-white text-gray-800">Courant</option>
+                                        <hr>
+                                        <option value="A1" class="bg-white text-gray-800">A1</option>
+                                        <option value="A2" class="bg-white text-gray-800">A2</option>
+                                        <option value="B1" class="bg-white text-gray-800">B1</option>
+                                        <option value="B2" class="bg-white text-gray-800">B2</option>
+                                        <option value="C1" class="bg-white text-gray-800">C1</option>
+                                        <option value="C2" class="bg-white text-gray-800">C2</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <button type="button" id="button-add-language" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                    hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                    shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter une langue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Centres d'intérêt -->
+
+                    <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-lg font-semibold text-blue-800 mb-4">
+                            Centres d’intérêt
+                        </h3>
+                        <div id="interest-section" class="space-y-4">
+                            <div class="p-3 rounded">
+                                <div>
+                                    <label class="flex-grow truncate block font-medium text-gray-600 text-sm"
+                                        for="input-interest-name">Intérêt</label>
+                                    <input type="text" name="input-interest-name" title="Intérêt"
+                                        placeholder="Entrez un intérêt"
+                                        class="mt-1 block w-full p-2 rounded-md border-gray-100 bg-gray-100 shadow-sm ">
+                                </div>
+                                <button type="button" id="button-add-interest" class="mt-3 px-6 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-semibold rounded-lg 
+                                    hover:from-blue-700 hover:to-blue-900 transition-all duration-300 
+                                    shadow-lg hover:shadow-xl transform hover:scale-105">
+                                    Ajouter un centre d'interêt
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
             </div>
-        </section>
 
-        <section class = "print-btn-sc">
-            <div class = "container">
-                <button type = "button" class = "print-btn btn btn-primary" onclick="printCV()">Print CV</button>
+
+            <!-- Section Prévisualisation -->
+            <div class="sticky top-0 h-screen w-full md:w-[55%]">
+                <iframe src="cv-preview.html" frameborder="0" class="w-full h-full"></iframe>
             </div>
-        </section>
 
 
-        
+        </div>
 
-        <!-- jquery cdn -->
-        <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-        <!-- jquery repeater cdn -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.js" integrity="sha512-bZAXvpVfp1+9AUHQzekEZaXclsgSlAeEnMJ6LfFAvjqYUVZfcuVXeQoN5LhD7Uw0Jy4NCY9q3kbdEXbwhZUmUQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <!-- custom js -->
-        <script src = "assets/js/script.js"></script>
-        <!-- app js -->
-        <script src="assets/js/app.js"></script>
-    </body>
+        <script src="Gen-Cv.js"></script>
+</body>
+
 </html>
