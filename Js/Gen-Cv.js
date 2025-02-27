@@ -53,7 +53,6 @@ function handlePersonalInfoChange() {
   cvData.sexe = document.getElementById("select-personal-gender").value;
   cvData.age = document.getElementById("input-personal-age").value;
   cvData.langue = document.getElementById("input-language").value;
-  cvData.sel
   cvData.statut = document.getElementById("input-personal-situation").value;
 
   updatePreview();
