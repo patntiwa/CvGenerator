@@ -40,8 +40,8 @@ document
   });
 
 // Validation Âge
-function validateAge(age) {
-  const ageInt = parseInt(age, 10);
+function validateAge(ageValue) {
+  const ageInt = parseInt(ageValue, 10);
   return ageInt >= 18 && ageInt <= 65;
 }
 
@@ -49,10 +49,14 @@ function validateAge(age) {
 function handlePersonalInfoChange() {
   const ageValue = document.getElementById("input-personal-age").value;
 
-  if (!validateAge(ageValue)) {
+  // Validation conditionnelle de l'âge
+  if (ageValue !== "" && !validateAge(ageValue)) {
     showNotification("L'âge doit être compris entre 18 et 65 ans.", "error");
-    return; // Stoppe l'exécution si l'âge est invalide
+  } else {
+    cvData.age = ageValue; // Mettre à jour uniquement si valide ou vide
   }
+
+  // Mise à jour des autres champs dans tous les cas
   cvData.nom = document.getElementById("input-personal-lastname").value;
   cvData.prenom = document.getElementById("input-personal-firstname").value;
   cvData.title = document.getElementById("input-personal-title").value;
@@ -63,12 +67,10 @@ function handlePersonalInfoChange() {
   cvData.email = document.getElementById("input-personal-email").value;
   cvData.phone = document.getElementById("input-personal-phone").value;
   cvData.sexe = document.getElementById("select-personal-gender").value;
-  cvData.age = ageValue;
   cvData.languageInput = document.getElementById("input-language").value;
-  cvDatalanguageLevelSelect = document.querySelector(
+  cvData.languageLevelSelect = document.querySelector(
     'select[name="select-level-language"]'
   ).value;
-
   cvData.statut = document.getElementById("input-personal-situation").value;
 
   updatePreview();
