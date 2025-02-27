@@ -405,7 +405,7 @@
                 <div class="reference-item">
                     <h4 class="item-title">${ref.nom}</h4>
                     <p class="item-subtitle">${ref.entreprise} - ${ref.ville}</p>
-                    <p class="item-description">📞 ${ref.telephone} | ✉️ ${ref.email}</p>
+                    <p class="item-description"> ${ref.telephone} | ${ref.email}</p>
                 </div>
             `).join('');
 
@@ -482,40 +482,53 @@
         // Exemple de données (à utiliser si rien n'est trouvé dans le localStorage)
         const exampleData = {
             photo: '',
-            nom: 'Dupont',
-            prenom: 'Jean',
+            nom: 'TAGNE',
+            prenom: 'Clovis Espoir',
             title: 'Développeur Full Stack',
             description: 'Passionné par le développement web et les nouvelles technologies.',
-            address: '123 Rue de Paris, 75001 Paris, France',
-            email: 'jean.dupont@example.com',
-            phone: '+33 6 12 34 56 78',
+            address: 'Douala V, Wouri, Beedi song-loulou',
+            email: 'tagne.clovis@example.com',
+            phone: '6 22 34 56 78/ 6 95 41 90 72',
             competences: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js'],
             experiences: [
                 {
                     poste: 'Développeur Full Stack',
                     entreprise: 'TechCorp',
-                    debut: '2019',
+                    debut: '2029',
                     fin: 'Présent',
                     description: 'Développement et maintenance d\'applications web.'
                 }
+                // {
+                //     poste: 'Développeur Full Stack',
+                //     entreprise: 'Orange',
+                //     debut: '2019',
+                //     fin: '2022',
+                //     description: 'Développement et maintenance d\'applications web.'
+                // }
             ],
             formations: [
                 {
                     diplome: 'Master en Informatique',
-                    ecole: 'Université de Paris',
+                    ecole: 'Université de Douala',
                     anneeDebut: '2015',
                     anneeFin: '2017'
                 }
+                // {
+                //     diplome: 'Licence en Informatique',
+                //     ecole: 'Université de Douala',
+                //     anneeDebut: '2014',
+                //     anneeFin: '2015'
+                // }
             ],
             interets: ['Voyages', 'Photographie', 'Musique'],
             langues: ['Anglais (C1)', 'Espagnol (B2)'],
             references: [
                 {
-                    nom: 'Marie Durand',
+                    nom: 'Atangana Jean Bosco',
                     entreprise: 'TechCorp',
                     ville: 'Paris',
                     telephone: '+33 6 98 76 54 32',
-                    email: 'marie.durand@techcorp.com'
+                    email: 'Jean.Bosco@techcorp.com'
                 }
             ]
         };
