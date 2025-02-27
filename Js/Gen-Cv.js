@@ -45,15 +45,45 @@ function validateAge(ageValue) {
   return ageInt >= 18 && ageInt <= 65;
 }
 
+// Validation Email
+
+function validateEmail(emailValue) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(emailValue);
+}
+
+// Validation Téléphone
+function validatePhone() {
+  const phonePattern = /^[0-9]{10}$/;
+  return phonePattern.test(phoneValue);
+}
+
 // Fonction pour gérer les changements dans les champs d'information personnelle
 function handlePersonalInfoChange() {
   const ageValue = document.getElementById("input-personal-age").value;
 
   // Validation conditionnelle de l'âge
   if (ageValue !== "" && !validateAge(ageValue)) {
-    showNotification("L'âge doit être compris entre 18 et 65 ans.", "error");
+    //showNotification("L'âge doit être compris entre 18 et 65 ans.", "error");
   } else {
     cvData.age = ageValue; // Mettre à jour uniquement si valide ou vide
+  }
+
+  //Validation conditionnelle de l'email
+
+  const emailValue = document.getElementById("input-personal-email").value;
+  if (!emailPattern.test(emailValue)) {
+    showNotification("Erreur Email : Format non valide ");
+    errorEmail.classList.remove("hidden");
+  } else {
+    cvData.email = emailValue;
+  }
+
+  const phoneValue = document.getElementById("input-personal-phone").value;
+  if (!phonePattern.test(phoneValue)) {
+    showNotification("Erreur sur numero de telephone");
+  } else {
+    cvData.phone = phoneValue;
   }
 
   // Mise à jour des autres champs dans tous les cas
@@ -64,8 +94,6 @@ function handlePersonalInfoChange() {
     "textarea-personal-description"
   ).value;
   cvData.address = document.getElementById("input-personal-address").value;
-  cvData.email = document.getElementById("input-personal-email").value;
-  cvData.phone = document.getElementById("input-personal-phone").value;
   cvData.sexe = document.getElementById("select-personal-gender").value;
   cvData.languageInput = document.getElementById("input-language").value;
   cvData.languageLevelSelect = document.querySelector(
