@@ -169,7 +169,7 @@
                 <div class="reference-item">
                     <h4 class="item-title">${ref.nom}</h4>
                     <p class="item-subtitle">${ref.entreprise} - ${ref.ville}</p>
-                    <p class="item-description">📞 ${ref.telephone} | ✉️ ${ref.email}</p>
+                    <p class="item-description"><i class="fa-solid fa-phone"></i> ${ref.telephone} | <i class="fa-solid fa-envelope"></i> ${ref.email}</p>
                 </div>
             `).join('');
 
@@ -229,12 +229,6 @@
             window.print();
         });
 
-        // Bouton de mise à jour
-        document.getElementById('updateForm').addEventListener('click', function () {
-            // Envoyer un message au parent pour demander une mise à jour des données
-            window.parent.postMessage('requestUpdate', '*');
-        });
-
         // Bouton de réinitialisation
         document.getElementById('resetForm').addEventListener('click', function () {
             if (confirm('Êtes-vous sûr de vouloir réinitialiser les données du CV ?')) {
@@ -246,7 +240,7 @@
         // Exemple de données (à utiliser si rien n'est trouvé dans le localStorage)
         const exampleData = {
             photo: '',
-            nom: 'Dupont',
+            nom: 'ATANGANA',
             prenom: 'Jean',
             title: 'Développeur Full Stack',
             description: 'Passionné par le développement web et les nouvelles technologies.',

@@ -52,6 +52,8 @@ function handlePersonalInfoChange() {
   cvData.phone = document.getElementById("input-personal-phone").value;
   cvData.sexe = document.getElementById("select-personal-gender").value;
   cvData.age = document.getElementById("input-personal-age").value;
+  cvData.langue = document.getElementById("input-language").value;
+  cvData.sel
   cvData.statut = document.getElementById("input-personal-situation").value;
 
   updatePreview();
@@ -130,11 +132,13 @@ document
       showNotification("Expérience ajoutée avec succès!");
 
       updatePreview();
-      
     } else {
       alert("Veuillez remplir au moins le poste et l'entreprise.");
       // Notification de succès
-      showNotification("Veuillez remplir au moins le poste et l'entreprise.", "error");
+      showNotification(
+        "Veuillez remplir au moins le poste et l'entreprise.",
+        "error"
+      );
     }
   });
 
@@ -200,8 +204,11 @@ document
       document.querySelector('[name="input-education-startdate"]').value = "";
       document.querySelector('[name="input-education-enddate"]').value = "";
 
+      showNotification("Formation ajoutée avec succès!");
+
       updatePreview();
     } else {
+      showNotification("Veuillez remplir les champs obligatoires", "error");
       alert("Veuillez remplir au moins le diplôme et l'école.");
     }
   });
@@ -224,8 +231,8 @@ document
               <button class="delete-skill text-red-500 hover:text-red-700" data-index="${
                 cvData.competences.length - 1
               }">
-                  <i class="fas fa-trash"></i>
-              </button>
+                <i class="fas fa-trash"></i>
+                <i class="fa-solid fa-pen-to-square"></i>
           `;
 
       document.getElementById("skill-section").appendChild(skillList);
@@ -233,9 +240,12 @@ document
       // Réinitialiser le champ
       document.querySelector('[name="input-skill-name"]').value = "";
 
+      showNotification("Compétence ajoutée avec succès!");
+
       updatePreview();
     } else {
       alert("Veuillez entrer une compétence.");
+      showNotification("Veuillez entrer une compétence", "error");
     }
   });
 
@@ -305,6 +315,7 @@ document
                     cvData.references.length - 1
                   }">
                       <i class="fas fa-trash"></i>
+                      <i class="fa-solid fa-pen-to-square"></i>
                   </button>
               </div>
               <div class="text-sm text-gray-600">${telephone} | ${email}</div>
@@ -319,9 +330,11 @@ document
       document.getElementById("input-reference-phone").value = "";
       document.getElementById("input-reference-email").value = "";
 
+      showNotification("Référence ajoutée avec succès!");
       updatePreview();
     } else {
       alert("Veuillez remplir au moins le nom et l'entreprise.");
+      showNotification("Veuillez remplir les champs obligatoires", "error");
     }
   });
 
@@ -352,12 +365,41 @@ document
 
       // Réinitialiser le champ
       select.selectedIndex = 0;
-
+      showNotification("Langue ajoutée avec succès!");
       updatePreview();
     } else {
       alert("Veuillez sélectionner une langue.");
+      showNotification("Veuillez sélectionner une langue", "error");
     }
   });
+
+// Fonction pour afficher une notification
+function showNotification(message, type = "success") {
+  // Créer l'élément de notification
+  const notification = document.createElement("div");
+  notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 transform transition-all duration-500 ease-in-out ${
+    type === "success" ? "bg-green-500" : "bg-red-500"
+  } text-white font-semibold`;
+  notification.textContent = message;
+
+  // Ajouter au DOM
+  document.body.appendChild(notification);
+
+  // Animation d'entrée
+  setTimeout(() => {
+    notification.classList.add("translate-y-2");
+  }, 10);
+
+  // Supprimer après un délai
+  setTimeout(() => {
+    notification.classList.remove("translate-y-2");
+    notification.classList.add("-translate-y-full", "opacity-0");
+
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 500);
+  }, 3000);
+}
 
 // Gestion de la suppression d'éléments
 document.body.addEventListener("click", function (e) {
@@ -461,7 +503,7 @@ function updateFormFields() {
   document.getElementById("input-personal-phone").value = cvData.age;
 
   // Mettre à jour les autres sections (compétences, expériences, formations, etc.)
-  // Vous pouvez ajouter des fonctions similaires pour chaque section
+  //fonctions similaires pour chaque section
   updateExperienceFields();
   updateEducationFields();
   updateSkillFields();
@@ -598,7 +640,7 @@ document.getElementById("resetForm")?.addEventListener("click", function () {
     )
   ) {
     document.getElementById("cvForm").reset();
-
+    showNotification("Formulaire réinitialisé avec succès!");
     // Réinitialiser les données
     cvData = {
       photo: "https://placehold.co/600x400",
