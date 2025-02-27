@@ -22,10 +22,16 @@
 
             <!-- Section Formulaire -->
             <div class="p-6 rounded-lg w-full lg:w-[40%] bg-white shadow-xl">
-                <h2
-                    class="bg-gradient-to-r from-blue-600 to-blue-800 text-xl md:text-2xl p-3 rounded-lg font-bold mb-6 text-white shadow-md">
-                    Formulaire de CV
-                </h2>
+                <div
+                    class="bg-gradient-to-r from-blue-600 to-blue-800 mb-6 p-3 shadow-md rounded-lg flex flex-col md:flex-row justify-between">
+                    <h2 class="text-xl md:text-2xl font-bold  text-white ">
+                        Formulaire de CV
+                    </h2>
+                    <button id="resetForm"
+                        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
                 <!-- Onglets Tabs  -->
                 <div class="tabs-container border-b border-gray-200">
                     <button id="tab-personal"
