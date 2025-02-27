@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div id="cvDocument" class="cv-container print-container">
+        <div id="cvDocument" class="cv-container print print-container">
             <!-- Colonne gauche -->
             <div class="left-column">
                 <!-- Photo de profil -->
@@ -205,7 +205,7 @@
             const element = document.getElementById('cvDocument');
             const opt = {
                 margin: 0,
-                filename: 'mon-cv.pdf',
+                filename: 'cv.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
