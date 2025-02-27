@@ -39,8 +39,20 @@ document
     }
   });
 
+// Validation Âge
+function validateAge(age) {
+  const ageInt = parseInt(age, 10);
+  return ageInt >= 18 && ageInt <= 65;
+}
+
 // Fonction pour gérer les changements dans les champs d'information personnelle
 function handlePersonalInfoChange() {
+  const ageValue = document.getElementById("input-personal-age").value;
+
+  if (!validateAge(ageValue)) {
+    showNotification("L'âge doit être compris entre 18 et 65 ans.", "error");
+    return; // Stoppe l'exécution si l'âge est invalide
+  }
   cvData.nom = document.getElementById("input-personal-lastname").value;
   cvData.prenom = document.getElementById("input-personal-firstname").value;
   cvData.title = document.getElementById("input-personal-title").value;
@@ -51,11 +63,12 @@ function handlePersonalInfoChange() {
   cvData.email = document.getElementById("input-personal-email").value;
   cvData.phone = document.getElementById("input-personal-phone").value;
   cvData.sexe = document.getElementById("select-personal-gender").value;
-  cvData.age = document.getElementById("input-personal-age").value;
+  cvData.age = ageValue;
   cvData.languageInput = document.getElementById("input-language").value;
   cvDatalanguageLevelSelect = document.querySelector(
     'select[name="select-level-language"]'
   ).value;
+
   cvData.statut = document.getElementById("input-personal-situation").value;
 
   updatePreview();
@@ -246,7 +259,6 @@ document
 
       updatePreview();
     } else {
-      alert("Veuillez entrer une compétence.");
       showNotification("Veuillez entrer une compétence", "error");
     }
   });
@@ -281,8 +293,9 @@ document
       document.querySelector('[name="input-interest-name"]').value = "";
 
       updatePreview();
+      showNotification("centre d'intérêt ajouté.");
     } else {
-      alert("Veuillez entrer un centre d'intérêt.");
+      showNotification("Veuillez entrer un centre d'intérêt.", "error");
     }
   });
 
@@ -335,7 +348,6 @@ document
       showNotification("Référence ajoutée avec succès!");
       updatePreview();
     } else {
-      alert("Veuillez remplir au moins le nom et l'entreprise.");
       showNotification("Veuillez remplir les champs obligatoires", "error");
     }
   });
@@ -350,7 +362,7 @@ document
     ).value;
 
     if (langue && niveau) {
-      cvData.langues.push(`${langue} (${niveau})`);
+      cvData.langues.push({ nom: langue, niveau: niveau });
 
       // Création d'un élément visuel pour la langue ajoutée
       const languageList = document.createElement("div");
