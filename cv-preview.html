@@ -161,15 +161,15 @@
 
             // Langues
             const languagesList = document.getElementById('cvLanguages');
-            languagesList.innerHTML = data.langues.map(langue => `<li>${langue} (${niveau})</li>`).join('');
+            languagesList.innerHTML = data.langues.map(langue => `<li>${langue.nom} (${langue.niveau})</li>`).join('');
 
             // Références
             const referencesList = document.getElementById('cvReferences');
             referencesList.innerHTML = data.references.map(ref => `
                 <div class="reference-item">
-                    <h4 class="item-title">${ref.nom}</h4>
-                    <p class="item-subtitle">${ref.entreprise} - ${ref.ville}</p>
-                    <p class="item-description"><i class="fa-solid fa-phone"></i> ${ref.telephone} | <i class="fa-solid fa-envelope"></i> ${ref.email}</p>
+                     <h4 class="item-title">${ref.nom}</h4>
+                     <p class="item-subtitle">${ref.entreprise} - ${ref.ville}</p>
+                     <p class="item-description"><i class="fa-solid fa-phone"></i> ${ref.telephone} | <i class="fa-solid fa-envelope"></i> ${ref.email}</p>
                 </div>
             `).join('');
 
@@ -181,9 +181,9 @@
         function saveToLocalStorage(data) {
             try {
                 localStorage.setItem(CV_STORAGE_KEY, JSON.stringify(data));
-                console.log('CV data saved to localStorage');
+                console.log("Données CV enregistrées dans le stockage local ");
             } catch (error) {
-                console.error('Error saving to localStorage:', error);
+                console.error("Erreur lors de l'enregistrement dans le stockage local:", error);
             }
         }
 
@@ -195,7 +195,7 @@
                     return JSON.parse(savedData);
                 }
             } catch (error) {
-                console.error('Error loading from localStorage:', error);
+                console.error('Erreur lors du chargement depuis le stockage local:', error);
             }
             return null;
         }
@@ -239,41 +239,71 @@
 
         // Exemple de données (à utiliser si rien n'est trouvé dans le localStorage)
         const exampleData = {
-            photo: '',
-            nom: 'ATANGANA',
-            prenom: 'Jean',
-            title: 'Développeur Full Stack',
-            description: 'Passionné par le développement web et les nouvelles technologies.',
-            address: '123 Rue de Paris, 75001 Paris, France',
-            email: 'jean.dupont@example.com',
-            phone: '+33 6 12 34 56 78',
-            competences: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js'],
+            photo: "",
+            nom: "ATANGANA",
+            prenom: "Jean",
+            title: "Développeur Full Stack",
+            description: "Passionné par le développement web et les nouvelles technologies.",
+            address: "Toronto, Canada",
+            email: "jean.atangana@example.com",
+            phone: "+1 647 123 4567",
+            competences: ["HTML", "CSS", "JavaScript", "React", "Node.js", "MongoDB", "GraphQL"],
             experiences: [
                 {
-                    poste: 'Développeur Full Stack',
-                    entreprise: 'TechCorp',
-                    debut: '2019',
-                    fin: 'Présent',
-                    description: 'Développement et maintenance d\'applications web.'
+                    poste: "Développeur Full Stack",
+                    entreprise: "Innovatech Solutions",
+                    debut: "2020",
+                    fin: "Présent",
+                    description: "Conception et développement d'applications web modernes pour divers clients internationaux."
+                },
+                {
+                    poste: "Développeur Front End",
+                    entreprise: "Orange Digital Center",
+                    debut: "2015",
+                    fin: "2017",
+                    description: "Conception et développement d'applications web modernes pour divers clients internationaux."
+                },
+                {
+                    poste: "Stagiaire Développeur Web",
+                    entreprise: "Startup XYZ",
+                    debut: "2014",
+                    fin: "2015",
+                    description: "Développement de sites web et d'applications mobiles pour les clients de la startup."
                 }
             ],
             formations: [
                 {
-                    diplome: 'Master en Informatique',
-                    ecole: 'Université de Paris',
-                    anneeDebut: '2015',
-                    anneeFin: '2017'
+                    diplome: "Master en Informatique",
+                    ecole: "Université de Yaoundé I",
+                    anneeDebut: "2014",
+                    anneeFin: "2016"
+                },
+                {
+                    diplome: "Licence en Informatique",
+                    ecole: "Université de Yaoundé I",
+                    anneeDebut: "2011",
+                    anneeFin: "2014"
                 }
             ],
-            interets: ['Voyages', 'Photographie', 'Musique'],
-            langues: ['Anglais (C1)', 'Espagnol (B2)'],
+            interets: ["Voyages", "Cuisine africaine", "Basketball"],
+            langues: [
+                { nom: "Français", niveau: "C2" },
+                { nom: "Anglais", niveau: "C1" }
+            ],
             references: [
                 {
-                    nom: 'Marie Durand',
-                    entreprise: 'TechCorp',
-                    ville: 'Paris',
-                    telephone: '+33 6 98 76 54 32',
-                    email: 'marie.durand@techcorp.com'
+                    nom: "Paul Nkem",
+                    entreprise: "Innovatech Solutions",
+                    ville: "Toronto",
+                    telephone: "+1 416 789 1234",
+                    email: "paul.nkem@innovatech.com"
+                },
+                {
+                    nom: "Alice Mvogo",
+                    entreprise: "Startup XYZ",
+                    ville: "Yaoundé",
+                    telephone: "+237 678 123 456",
+                    email: "alicemvogo@startupxyz;com",
                 }
             ]
         };
