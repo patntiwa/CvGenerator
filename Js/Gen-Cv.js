@@ -39,66 +39,56 @@ document
     }
   });
 
-// Validation Âge
-function validateAge(ageValue) {
-  const ageInt = parseInt(ageValue, 10);
-  return ageInt >= 18 && ageInt <= 65;
-}
-
 // Validation Email
-
 function validateEmail(emailValue) {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(emailValue);
 }
 
 // Validation Téléphone
-function validatePhone() {
+function validatePhone(phoneValue) {
   const phonePattern = /^[0-9]{10}$/;
   return phonePattern.test(phoneValue);
+}
+
+// Validation Age
+function validateAge(ageValue) {
+  const age = parseInt(ageValue, 10);
+  return !isNaN(age) && age >= 18 && age <= 65;
 }
 
 // Fonction pour gérer les changements dans les champs d'information personnelle
 function handlePersonalInfoChange() {
   const ageValue = document.getElementById("input-personal-age").value;
-
-  // Validation conditionnelle de l'âge
   if (ageValue !== "" && !validateAge(ageValue)) {
-    //showNotification("L'âge doit être compris entre 18 et 65 ans.", "error");
+    showNotification("L'âge doit être compris entre 18 et 65 ans.", "error");
   } else {
-    cvData.age = ageValue; // Mettre à jour uniquement si valide ou vide
+    cvData.age = ageValue;
   }
 
-  //Validation conditionnelle de l'email
-
   const emailValue = document.getElementById("input-personal-email").value;
-  if (!emailPattern.test(emailValue)) {
-    showNotification("Erreur Email : Format non valide ");
-    errorEmail.classList.remove("hidden");
+  if (!validateEmail(emailValue)) {
+    showNotification("Erreur Email : Format non valide", "error");
   } else {
     cvData.email = emailValue;
   }
 
   const phoneValue = document.getElementById("input-personal-phone").value;
-  if (!phonePattern.test(phoneValue)) {
-    showNotification("Erreur sur numero de telephone");
+  if (!validatePhone(phoneValue)) {
+    showNotification("Erreur sur numéro de téléphone", "error");
   } else {
     cvData.phone = phoneValue;
   }
 
-  // Mise à jour des autres champs dans tous les cas
+  // Mise à jour des autres champs
   cvData.nom = document.getElementById("input-personal-lastname").value;
   cvData.prenom = document.getElementById("input-personal-firstname").value;
   cvData.title = document.getElementById("input-personal-title").value;
-  cvData.description = document.getElementById(
-    "textarea-personal-description"
-  ).value;
+  cvData.description = document.getElementById("textarea-personal-description").value;
   cvData.address = document.getElementById("input-personal-address").value;
   cvData.sexe = document.getElementById("select-personal-gender").value;
   cvData.languageInput = document.getElementById("input-language").value;
-  cvData.languageLevelSelect = document.querySelector(
-    'select[name="select-level-language"]'
-  ).value;
+  cvData.languageLevelSelect = document.querySelector('select[name="select-level-language"]').value;
   cvData.statut = document.getElementById("input-personal-situation").value;
 
   updatePreview();
