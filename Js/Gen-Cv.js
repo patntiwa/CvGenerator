@@ -59,7 +59,7 @@ function validateAge(ageValue) {
 
 // Fonction pour gérer les changements dans les champs d'information personnelle
 function handlePersonalInfoChange() {
-  const ageValue = document.getElementById("input-personal-age").value;
+  const ageValue = document.getElementById("input-personal-age").value; ç
   if (ageValue !== "" && !validateAge(ageValue)) {
     showNotification("L'âge doit être compris entre 18 et 65 ans.", "error");
   } else {
